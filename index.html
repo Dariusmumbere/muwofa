@@ -980,6 +980,119 @@ Uganda					</p>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics Counter</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .counter-section {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 50px 20px;
+            background-color: #fff;
+        }
+
+        .counter-card {
+            background-color: #4CAF50;
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            width: 30%;
+            min-width: 250px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .counter-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .counter-number {
+            font-size: 48px;
+            font-weight: bold;
+        }
+
+        .counter-label {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .counter-card {
+                width: 45%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .counter-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="counter-section">
+        <!-- Total Users Counter -->
+        <div class="counter-card">
+            <div class="counter-number" id="total-users">0</div>
+            <div class="counter-label">Total Users</div>
+        </div>
+
+        <!-- Products Sold Counter -->
+        <div class="counter-card">
+            <div class="counter-number" id="products-sold">0</div>
+            <div class="counter-label">Products Sold</div>
+        </div>
+
+        <!-- Website Visitors Counter -->
+        <div class="counter-card">
+            <div class="counter-number" id="website-visitors">0</div>
+            <div class="counter-label">Website Visitors</div>
+        </div>
+    </div>
+
+    <script>
+        // Function to animate the counters
+        function animateCounter(targetId, target, duration) {
+            let start = 0;
+            const step = Math.ceil(target / duration);
+            const counterElement = document.getElementById(targetId);
+
+            const interval = setInterval(() => {
+                start += step;
+                if (start >= target) {
+                    clearInterval(interval);
+                    counterElement.innerText = target; // Ensure it ends at the target
+                } else {
+                    counterElement.innerText = start;
+                }
+            }, 1);
+        }
+
+        // Start the counters with animation
+        animateCounter('total-users', 1200, 2000);
+        animateCounter('products-sold', 800, 1500);
+        animateCounter('website-visitors', 4500, 2500);
+    </script>
+
+</body>
+</html>
+
+			      <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
     <style>
         /* General Styles */
