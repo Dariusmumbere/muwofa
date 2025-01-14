@@ -509,6 +509,43 @@ and domestic violence prevention</div>
 		</div>
 							</div>
 		</section>
+		 <div class="scrolling-container">
+    <div class="image-track">
+      <div class="image-item">
+        <img src="director.jpg"height="300" width="300"alt="Image 1">
+        <p class="description">Director MUWOFA</p>
+      </div>
+      <div class="image-item">
+        <img src="director.jpg"height="300" width="300" alt="Image 2">
+        <p class="description">Kobusinge Jemimah<br>Executive Director MUWOFA</p>
+      </div>
+      <div class="image-item">
+        <img src="secretary.jpg" height="300" width="300"alt="Image 3">
+        <p class="description">Kyakimwa Miria<br>Secretary microfinance-MUWOFA</p>
+      </div>
+      <div class="image-item">
+        <img src="team.jpg" height="300" width="300"alt="Image 4">
+        <p class="description">2024-Bakery Training beneficieries</p>
+      </div>
+      <div class="image-item">
+        <img src="new 1.jpg" height="300" width="300"alt="Image 4">
+        <p class="description">Max Stadler with MUWOFA members</p>
+      </div>
+      <!-- Add more image items as needed -->
+    </div>
+  </div>
+
+  <script>
+    const imageTrack = document.querySelector('.image-track');
+
+    imageTrack.addEventListener('mouseover', () => {
+      imageTrack.style.animationPlayState = 'paused';
+    });
+
+    imageTrack.addEventListener('mouseout', () => {
+      imageTrack.style.animationPlayState = 'running';
+    });
+  </script>
 				<section class="elementor-section elementor-top-section elementor-element elementor-element-f105788 elementor-section-full_width elementor-section-stretched elementor-section-height-default elementor-section-height-default row-top" data-id="f105788" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;stretch_section&quot;:&quot;section-stretched&quot;}">
 						<div class="elementor-container elementor-column-gap-no">
 					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-b51d696 column-style-top" data-id="b51d696" data-element_type="column">
@@ -991,6 +1028,64 @@ Uganda					</p>
             margin: 0;
             padding: 0;
         }
+	    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+
+    .scrolling-container {
+      overflow: hidden;
+      width: 100%;
+      position: relative;
+      background-color: #fff;
+    }
+
+    .image-track {
+      display: flex;
+      animation: scroll 25s linear infinite;
+    }
+
+    .image-item {
+      flex-shrink: 0;
+      margin: 10px;
+      text-align: center;
+    }
+
+    .image-item img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      display: block;
+      margin: 0 auto;
+    }
+
+    .description {
+      margin-top: 5px;
+      font-size: 19px;
+      max-width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      text-shadow: bisque;
+      font-weight: bolder;
+    }
+
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .image-item img {
+        width: 80%;
+      }
+    }
 
         .counter-section {
             display: flex;
