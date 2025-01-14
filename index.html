@@ -621,6 +621,120 @@ design.</p></div></div>		</div>
 		</div>
 							</div>
 		</section>
+				<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Image Slider</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .slider-container {
+      width: 100%;
+      max-width: 900px;
+      overflow: hidden;
+      position: relative;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .slider {
+      display: flex;
+      transition: transform 1s ease;
+    }
+
+    .slide {
+      position: relative;
+      min-width: 100%;
+    }
+
+    .slider img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 15px;
+      object-fit: cover;
+    }
+
+    .description {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 18px;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 10px;
+      border-radius: 5px;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .slider .slide:hover .description {
+      opacity: 1;
+    }
+
+    /* Responsiveness */
+    @media screen and (max-width: 768px) {
+      .description {
+        font-size: 14px;
+        bottom: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slider-container">
+    <div class="slider">
+      <div class="slide">
+        <img src="director.jpg"/>
+        <div class="description">This is image 1</div>
+      </div>
+      <div class="slide">
+        <img src="secretary.jpg" alt="Image 2" />
+        <div class="description">This is image 2</div>
+      </div>
+      <div class="slide">
+        <img src="slide1.jpg" alt="Image 3" />
+        <div class="description">This is image 3</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let index = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+
+    function moveSlider() {
+      index++;
+      if (index >= totalSlides) {
+        index = 0;
+      }
+      document.querySelector('.slider').style.transform = `translateX(-${index * 100}%)`;
+    }
+
+    setInterval(moveSlider, 3000); // Slide every 3 seconds
+  </script>
+
+</body>
+</html>
+
 				<section class="elementor-section elementor-top-section elementor-element elementor-element-6ccf9db elementor-section-full_width elementor-section-stretched elementor-section-height-default elementor-section-height-default row-top" data-id="6ccf9db" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;stretch_section&quot;:&quot;section-stretched&quot;}">
 						<div class="elementor-container elementor-column-gap-default">
 					<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-9ee0e65 column-style-top" data-id="9ee0e65" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
