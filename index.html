@@ -1139,48 +1139,48 @@ Uganda					</p>
 <body>
 
     <div class="counter-section">
-        <!-- Total Users Counter -->
-        <div class="counter-card">
-            <div class="counter-number" id="total-users">200</div>
-            <div class="counter-label">Beneficiaries</div>
-        </div>
-
-        <!-- Products Sold Counter -->
-        <div class="counter-card">
-            <div class="counter-number" id="products-sold">20</div>
-            <div class="counter-label">Projects</div>
-        </div>
-
-        <!-- Website Visitors Counter -->
-        <div class="counter-card">
-            <div class="counter-number" id="website-visitors">2025</div>
-            <div class="counter-label">Current year</div>
-        </div>
+    <!-- Total Users Counter -->
+    <div class="counter-card">
+        <div class="counter-number" id="total-users">200</div>
+        <div class="counter-label">Beneficiaries</div>
     </div>
 
-    <script>
-        // Function to animate the counters
-        function animateCounter(targetId, target, duration) {
-            let start = 0;
-            const step = Math.ceil(target / duration);
-            const counterElement = document.getElementById(targetId);
+    <!-- Products Sold Counter -->
+    <div class="counter-card">
+        <div class="counter-number" id="products-sold">20</div>
+        <div class="counter-label">Projects</div>
+    </div>
 
-            const interval = setInterval(() => {
-                start += step;
-                if (start >= target) {
-                    clearInterval(interval);
-                    counterElement.innerText = target; // Ensure it ends at the target
-                } else {
-                    counterElement.innerText = start;
-                }
-            }, 1);
-        }
+    <!-- Website Visitors Counter -->
+    <div class="counter-card">
+        <div class="counter-number" id="website-visitors">2025</div>
+        <div class="counter-label">Current year</div>
+    </div>
+</div>
 
-        // Start the counters with animation
-        animateCounter('total-users', 0, 200);
-        animateCounter('products-sold', 0, 50);
-        animateCounter('website-visitors', 1997, 2025);
-    </script>
+<script>
+    // Function to animate the counters
+    function animateCounter(targetId, target, duration) {
+        let start = 0;
+        const step = Math.ceil(target / (duration / 50)); // Adjust for smoother animation
+        const counterElement = document.getElementById(targetId);
+
+        const interval = setInterval(() => {
+            start += step;
+            if (start >= target) {
+                clearInterval(interval);
+                counterElement.innerText = target; // Ensure it ends at the target
+            } else {
+                counterElement.innerText = start;
+            }
+        }, 50); // Update every 50 ms for smoother animation
+    }
+
+    // Start the counters with animation
+    animateCounter('total-users', 200, 2000); // 200 in 2 seconds
+    animateCounter('products-sold', 50, 2000); // 50 in 2 seconds
+    animateCounter('website-visitors', 2025, 3000); // 2025 in 3 seconds
+</script>
 
 </body>
 </html>
