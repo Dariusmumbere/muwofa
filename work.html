@@ -462,6 +462,105 @@ The legumes help to fix nitrogen</p></div></div>		</div>
 			</div><!--end page content-->
 	
 </div><!-- End page -->
+	<!DOCTYPE html>
+<html lang="en">
+<head>
+    /* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background: #f9f9f9;
+}
+
+header {
+    text-align: center;
+    background: linear-gradient(45deg, #4facfe, #00f2fe);
+    color: white;
+    padding: 20px 0;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+/* Video Section */
+.video-section {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.video-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.video-wrapper {
+    flex: 1 1 calc(50% - 20px); /* Adjusts to two columns */
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    padding: 10px;
+}
+
+video {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.video-wrapper h3 {
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+.video-wrapper p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .video-wrapper {
+        flex: 1 1 100%; /* Stacks videos on smaller screens */
+    }
+}
+	
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main>
+        <section class="video-section">
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <video controls>
+                        <source src="video1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <h3>Video Title 1</h3>
+                    <p>A brief description of the first video.</p>
+                </div>
+                <div class="video-wrapper">
+                    <video controls>
+                        <source src="video2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <h3>Video Title 2</h3>
+                    <p>A brief description of the second video.</p>
+                </div>
+            </div>
+        </section>
+    
+
 
 	<footer id="wp-footer" class="clearfix">
 		
