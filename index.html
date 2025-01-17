@@ -3,6 +3,97 @@
 <!DOCTYPE html>
 <html lang="en-US" prefix="og: https://ogp.me/ns#" class="no-js">
 <head>
+	<style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background: rgb(170, 185, 170);
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .header {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .category {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      overflow: hidden;
+    }
+
+    .category-header {
+      background: lightgreen;
+      color: white;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .category-header:hover {
+      background: green;
+    }
+
+    .category-header span {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .category-header .arrow {
+      transition: transform 0.3s ease;
+    }
+
+    .category-header.active .arrow {
+      transform: rotate(180deg);
+    }
+
+    .images {
+      display: none;
+      padding: 10px;
+      background: #f1f1f1;
+    }
+
+    .images img {
+      width: 100%;
+      max-width: 150px;
+      margin: 5px;
+      border-radius: 5px;
+      transition: transform 0.3s ease;
+    }
+
+    .images img:hover {
+      transform: scale(1.1);
+    }
+
+    /* Responsiveness */
+    @media (min-width: 600px) {
+      .images {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+    }
+
+    @media (min-width: 900px) {
+      .images {
+        grid-template-columns: repeat(5, 1fr);
+      }
+    }
+  </style>
 	<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-C6LTWBFGYP"></script>
 <script>
@@ -1083,6 +1174,65 @@ The legumes help to fix nitrogen</p></div></div>		</div>
 		</div>
 							</div>
 		</section>
+				<div class="container">
+  <div class="header">Mukiofa Images</div>
+
+  <div class="category">
+    <div class="category-header">
+      <span>Kyakimwa Miria watering her vegetables</span>
+      <div class="arrow">▼</div>
+    </div>
+    <div class="images">
+      <img src="email1.jpg" alt="Category 1 Image 1">
+      <img src="email2.jpg" alt="Category 1 Image 2">
+      <img src="email3.jpg" alt="Category 1 Image 3">
+      <img src="email4.jpg" alt="Category 1 Image 4">
+      <img src="email1.jpg" alt="Category 1 Image 5">
+    </div>
+  </div>
+
+  <div class="category">
+    <div class="category-header">
+      <span>Category 2</span>
+      <div class="arrow">▼</div>
+    </div>
+    <div class="images">
+      <img src=".jpg" alt="Category 2 Image 1">
+      <img src="email6.jpg" alt="Category 2 Image 2">
+      <img src="email7.jpg" alt="Category 2 Image 3">
+      <img src="email8.jpg" alt="Category 2 Image 4">
+      <img src="email9.jpg" alt="Category 2 Image 5">
+    </div>
+  </div>
+
+  <div class="category">
+    <div class="category-header">
+      <span>Category 3</span>
+      <div class="arrow">▼</div>
+    </div>
+    <div class="images">
+      <img src="email10.jpg" alt="Category 3 Image 1">
+      <img src="email11.jpg" alt="Category 3 Image 2">
+      <img src="email12.jpg" alt="Category 3 Image 3">
+      <img src="email13.jpg" alt="Category 3 Image 4">
+      <img src="email14.jpg" alt="Category 3 Image 5">
+    </div>
+  </div>
+
+  <div class="category">
+    <div class="category-header">
+      <span>Category 4</span>
+      <div class="arrow">▼</div>
+    </div>
+    <div class="images">
+      <img src="pic1.jpeg" alt="Category 4 Image 1">
+      <img src="pic2.jpeg" alt="Category 4 Image 2">
+      <img src="pic3.jpeg" alt="Category 4 Image 3">
+      <img src="pic4.jpeg" alt="Category 4 Image 4">
+      <img src="pic5.jpeg" alt="Category 4 Image 5">
+    </div>
+  </div>
+</div>
 				<section class="elementor-section elementor-top-section elementor-element elementor-element-45aa81f elementor-section-boxed elementor-section-height-default elementor-section-height-default row-top" data-id="45aa81f" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
 						<div class="elementor-container elementor-column-gap-default">
 					<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-6a6fc20 column-style-top" data-id="6a6fc20" data-element_type="column">
@@ -1786,6 +1936,18 @@ var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false
       reset: true,	    
     });
   </script>
+<script>
+  document.querySelectorAll('.category-header').forEach(header => {
+    header.addEventListener('click', () => {
+      const category = header.parentElement;
+      const images = category.querySelector('.images');
+      const arrow = header.querySelector('.arrow');
+
+      images.style.display = images.style.display === 'block' ? 'none' : 'block';
+      header.classList.toggle('active');
+    });
+  });
+</script>
 <script>window.lazyLoadOptions=[{elements_selector:"img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}},{elements_selector:".rocket-lazyload",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,}];window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(var i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
 if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
 images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
