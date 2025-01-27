@@ -87,12 +87,41 @@
         gap: 10px;
       }
     }
+@media (max-width: 768px) {
+      .image-track {
+        flex-wrap: nowrap;
+        gap: 10px;
+      }
 
+      .image-item {
+        max-width: 250px;
+      }
+
+      .description {
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .image-track {
+        flex-wrap: nowrap;
+        gap: 5px;
+      }
+
+      .image-item {
+        max-width: 200px;
+      }
+
+      .description {
+        font-size: 0.8rem;
+      }
+    }
     @media (min-width: 900px) {
       .images {
         grid-template-columns: repeat(5, 1fr);
       }
     }
+		
   </style>
 	<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-C6LTWBFGYP"></script>
