@@ -1465,9 +1465,29 @@ Uganda					</p>
     // Start the counters with animation
     animateCounter('total-users', 200, 20000); // 200 in 2 seconds
     animateCounter('products-sold', 8, 20000); // 50 in 2 seconds
-    animateCounter('website-visitors', 2025, 30000); // 2025 in 3 seconds
+    
 </script>
+<script>
+    // Function to animate years from 1997 to 2025
+    function animateYearCounter(targetId, startYear, endYear, duration) {
+        let currentYear = startYear;
+        const stepTime = Math.floor(duration / (endYear - startYear)); // Calculate time per year
+        const counterElement = document.getElementById(targetId);
 
+        const interval = setInterval(() => {
+            if (currentYear >= endYear) {
+                clearInterval(interval);
+                counterElement.innerText = endYear; // Ensure it ends at the target year
+            } else {
+                currentYear++;
+                counterElement.innerText = currentYear; // Update the displayed year
+            }
+        }, stepTime); // Update every calculated interval
+    }
+
+    // Start the counter animation for years
+    animateYearCounter('website-visitors', 1997, 2025, 5000); // Animate from 1997 to 2025 in 5 seconds
+</script>
 </body>
 </html>
 
