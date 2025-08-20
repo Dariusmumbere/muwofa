@@ -1,1398 +1,431 @@
-
-
 <!DOCTYPE html>
-<html lang="en-US" prefix="og: https://ogp.me/ns#" class="no-js">
-<head>
-	
-	<style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f9f9f9;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 20px;
-      background: rgb(170, 185, 170);
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .header {
-      text-align: center;
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
-
-    .category {
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      margin-bottom: 15px;
-      overflow: hidden;
-    }
-
-    .category-header {
-      background: lightgreen;
-      color: white;
-      padding: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-    }
-
-    .category-header:hover {
-      background: green;
-    }
-
-    .category-header span {
-      font-size: 18px;
-      font-weight: bold;
-    }
-
-    .category-header .arrow {
-      transition: transform 0.3s ease;
-    }
-
-    .category-header.active .arrow {
-      transform: rotate(180deg);
-    }
-
-    .images {
-      display: none;
-      padding: 10px;
-      background: #f1f1f1;
-    }
-
-    .images img {
-      width: 100%;
-      max-width: 150px;
-      margin: 5px;
-      border-radius: 5px;
-      transition: transform 0.3s ease;
-    }
-
-    .images img:hover {
-      transform: scale(1.1);
-    }
-
-    /* Responsiveness */
-    @media (min-width: 600px) {
-      .images {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
-      }
-    }
-@media (max-width: 768px) {
-      .image-track {
-        flex-wrap: nowrap;
-        gap: 10px;
-      }
-
-      .image-item {
-        max-width: 250px;
-      }
-
-      .description {
-        font-size: 0.9rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .image-track {
-        flex-wrap: nowrap;
-        gap: 5px;
-      }
-
-      .image-item {
-        max-width: 200px;
-      }
-
-      .description {
-        font-size: 0.8rem;
-      }
-    }
-    @media (min-width: 900px) {
-      .images {
-        grid-template-columns: repeat(5, 1fr);
-      }
-    }
-		
-  </style>
-	<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-C6LTWBFGYP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-C6LTWBFGYP');
-</script>
-	<script src="https://unpkg.com/scrollreveal"></script>
-	<style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f9f9f9;
-    }
-
-    .main-section {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      padding: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      background-color: #f0f9f0; /* Light green background color */
-      background-image: url('marie.png'); /* Optional background image */
-      background-size: cover;
-      background-blend-mode: overlay;
-      padding: 2rem; /* Add spacing for content */
-  
-    }
-
-    .intro {
-      flex: 1;
-      min-width: 300px;
-      padding-right: 2rem;
-      border-right: 1px solid #ddd;
-    }
-    .intro-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-    }	    
-    .intro-header .logo {
-    height: 200px; /* Adjust the logo size */
-    width: 200px;	    
-    margin-right: 0px; /* Add space between the logo and heading */
-    margin-top: 0px;	    
-    }
-    .intro h2 {
-      font-size: 2rem;
-      margin: 0;
-      color: #333;
-    }
-
-    .intro p {
-      font-size: 1rem;
-      line-height: 1.6;
-      color: #555;
-      margin-bottom: 1rem;
-    }
-
-    .projects {
-      flex: 2;
-      display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      justify-content: space-between;
-    }
-
-    .project-card {
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      padding: 1rem;
-      max-width: 350px;
-      flex: 1 1 calc(33% - 1rem);
-      text-align: left;
-    }
-
-    .project-card img {
-      width: 100%;
-      border-radius: 8px;
-      margin-bottom: 1rem;
-    }
-
-    .project-card h3 {
-      font-size: 1.25rem;
-      margin-bottom: 0.75rem;
-      color: #222;
-    }
-
-    .project-card p {
-      font-size: 0.95rem;
-      color: #555;
-      margin-bottom: 1rem;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 0.5rem 1rem;
-      background-color: green;
-      color: black;
-      border-radius: 4px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background 0.3s ease;
-    }
-
-    .btn:hover {
-      background-color: #218838;
-    }
-
-    @media (max-width: 768px) {
-      .main-section {
-        flex-direction: column;
-        gap: 1rem;
-      }
-
-      .intro {
-        border-right: none;
-        padding-right: 0;
-      }
-    }
-  </style>
-  	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  	<meta name="viewport" content="width=device-width, initial-scale=1">
-   <link rel="profile" href="https://gmpg.org/xfn/11">
-  		<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
-	
-<!-- Search Engine Optimization by Rank Math PRO - https://s.rankmath.com/home -->
-<title>Home | Mughende Women Farmers Association (MUWOFA)</title>
-<meta name="description" content="Mughende Women Farmers Association (MUWOFA) started with an aim to fight poverty among members and even in entire community of Kinyamaseke and Rwenzori region through savings and credit, tree planting, sustainable agriculture, and domestic violence prevention"/>
-<meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
-<link rel="canonical" href="index.html" />
-<meta property="og:locale" content="en_US" />
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Home | Mughende Women Farmers Association (MUWOFA)" />
-<meta property="og:description" content="Mughende Women Farmers Association (MUWOFA) started with an aim to fight poverty among members and even in entire community of Kinyamaseke and Rwenzori region through savings and credit, tree planting, sustainable agriculture, and domestic violence prevention" />
-<meta property="og:url" content="https://mughende-women.org" />
-<meta property="og:site_name" content="Mughende Women Farmers Association (MUWOFA)" />
-<meta property="og:updated_time" content="2023-06-10T09:16:16+00:00" />
-<meta property="article:published_time" content="2020-12-08T03:52:44+00:00" />
-<meta property="article:modified_time" content="2023-06-10T09:16:16+00:00" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Home | Mughende Women Farmers Association (MUWOFA)" />
-<meta name="twitter:description" content="Mughende Women Farmers Association (MUWOFA) started with an aim to fight poverty among members and even in entire community of Kinyamaseke and Rwenzori region through savings and credit, tree planting, sustainable agriculture, and domestic violence prevention" />
-<meta name="twitter:label1" content="Written by" />
-<meta name="twitter:data1" content="Baker" />
-<meta name="twitter:label2" content="Time to read" />
-<meta name="twitter:data2" content="3 minutes" />
-<script type="application/ld+json" class="rank-math-schema-pro">{"@context":"https://schema.org","@graph":[{"@type":"Place","@id":"https://mughende-women.org/#place","address":{"@type":"PostalAddress","streetAddress":"Kinyamaseke North Ward, Kinyamaseke Town Council, Kasese district Uganda","postalCode":"0000","addressCountry":"Uganda"}},{"@type":["LocalBusiness","Organization"],"@id":"https://mughende-women.org/#organization","name":"Mughende Women Farmers Association (MUWOFA)","url":"https://www.mughende-women.org","email":"admin@mughende-women.org","address":{"@type":"PostalAddress","streetAddress":"Kinyamaseke North Ward, Kinyamaseke Town Council, Kasese district Uganda","postalCode":"0000","addressCountry":"Uganda"},"logo":{"@type":"ImageObject","@id":"https://mughende-women.org/#logo","url":"https://www.mughende-women.org/wp-content/uploads/2020/12/Mughende-Women-Farmers-Association-MUWOFA-1.png","caption":"Mughende Women Farmers Association (MUWOFA)","inLanguage":"en-US","width":"250","height":"250"},"openingHours":["Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday 09:00-17:00"],"location":{"@id":"https://mughende-women.org/#place"},"image":{"@id":"https://mughende-women.org/#logo"},"telephone":"+256 (0)777308364"},{"@type":"WebSite","@id":"https://mughende-women.org/#website","url":"https://mughende-women.org","name":"Mughende Women Farmers Association (MUWOFA)","publisher":{"@id":"https://mughende-women.org/#organization"},"inLanguage":"en-US","potentialAction":{"@type":"SearchAction","target":"https://mughende-women.org/?s={search_term_string}","query-input":"required name=search_term_string"}},{"@type":"ImageObject","@id":"//www.mughende-women.org/wp-content/uploads/2020/12/slider_1-1.webp","url":"//www.mughende-women.org/wp-content/uploads/2020/12/slider_1-1.webp","width":"200","height":"200","inLanguage":"en-US"},{"@type":"Person","@id":"https://mughende-women.org/author/baker/","name":"Baker","url":"https://mughende-women.org/author/baker/","image":{"@type":"ImageObject","@id":"https://secure.gravatar.com/avatar/8ab0178d9e940c7277604507db5d9781?s=96&amp;d=mm&amp;r=g","url":"https://secure.gravatar.com/avatar/8ab0178d9e940c7277604507db5d9781?s=96&amp;d=mm&amp;r=g","caption":"Baker","inLanguage":"en-US"},"sameAs":["https://www.mughende-women.org"],"worksFor":{"@id":"https://mughende-women.org/#organization"}},{"@type":"WebPage","@id":"https://mughende-women.org/#webpage","url":"https://mughende-women.org/","name":"Home | Mughende Women Farmers Association (MUWOFA)","datePublished":"2020-12-08T03:52:44+00:00","dateModified":"2023-06-10T09:16:16+00:00","author":{"@id":"https://mughende-women.org/author/baker/"},"isPartOf":{"@id":"https://mughende-women.org/#website"},"primaryImageOfPage":{"@id":"//www.mughende-women.org/wp-content/uploads/2020/12/slider_1-1.webp"},"inLanguage":"en-US"},{"@type":"BlogPosting","headline":"Home | Mughende Women Farmers Association (MUWOFA)","keywords":"Mughende Women Farmers Association (MUWOFA)","datePublished":"2020-12-08T03:52:44+00:00","dateModified":"2023-06-10T09:16:16+00:00","author":{"@id":"https://mughende-women.org/author/baker/"},"publisher":{"@id":"https://mughende-women.org/#organization"},"description":"Mughende Women Farmers Association (MUWOFA) started with an aim to fight poverty among members and even in entire community of Kinyamaseke and Rwenzori region through savings and credit, tree planting, sustainable agriculture, and domestic violence prevention","name":"Home | Mughende Women Farmers Association (MUWOFA)","@id":"https://mughende-women.org/#richSnippet","isPartOf":{"@id":"https://mughende-women.org/#webpage"},"image":{"@id":"//www.mughende-women.org/wp-content/uploads/2020/12/slider_1-1.webp"},"inLanguage":"en-US","mainEntityOfPage":{"@id":"https://mughende-women.org/#webpage"}}]}</script>
-<!-- /Rank Math WordPress SEO plugin -->
-
-<link rel='dns-prefetch' href='//fonts.googleapis.com' />
-<link href='https://fonts.gstatic.com' crossorigin rel='preconnect' />
-<link rel="alternate" type="application/rss+xml" title="Mughende Women Farmers Association (MUWOFA) &raquo; Feed" href="https://mughende-women.org/feed/" />
-<link rel="alternate" type="application/rss+xml" title="Mughende Women Farmers Association (MUWOFA) &raquo; Comments Feed" href="https://mughende-women.org/comments/feed/" />
-<style id='wp-emoji-styles-inline-css' type='text/css'>
-
-	img.wp-smiley, img.emoji {
-		display: inline !important;
-		border: none !important;
-		box-shadow: none !important;
-		height: 1em !important;
-		width: 1em !important;
-		margin: 0 0.07em !important;
-		vertical-align: -0.1em !important;
-		background: none !important;
-		padding: 0 !important;
-	}
-</style>
-<link rel='stylesheet' id='wp-block-library-css' href='https://mughende-women.org/wp-includes/css/dist/block-library/style.min.css?ver=6.7.1' type='text/css' media='all' />
-<style id='wp-block-library-theme-inline-css' type='text/css'>
-.wp-block-audio :where(figcaption){color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-audio :where(figcaption){color:#ffffffa6}.wp-block-audio{margin:0 0 1em}.wp-block-code{border:1px solid #ccc;border-radius:4px;font-family:Menlo,Consolas,monaco,monospace;padding:.8em 1em}.wp-block-embed :where(figcaption){color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-embed :where(figcaption){color:#ffffffa6}.wp-block-embed{margin:0 0 1em}.blocks-gallery-caption{color:#555;font-size:13px;text-align:center}.is-dark-theme .blocks-gallery-caption{color:#ffffffa6}:root :where(.wp-block-image figcaption){color:#555;font-size:13px;text-align:center}.is-dark-theme :root :where(.wp-block-image figcaption){color:#ffffffa6}.wp-block-image{margin:0 0 1em}.wp-block-pullquote{border-bottom:4px solid;border-top:4px solid;color:currentColor;margin-bottom:1.75em}.wp-block-pullquote cite,.wp-block-pullquote footer,.wp-block-pullquote__citation{color:currentColor;font-size:.8125em;font-style:normal;text-transform:uppercase}.wp-block-quote{border-left:.25em solid;margin:0 0 1.75em;padding-left:1em}.wp-block-quote cite,.wp-block-quote footer{color:currentColor;font-size:.8125em;font-style:normal;position:relative}.wp-block-quote:where(.has-text-align-right){border-left:none;border-right:.25em solid;padding-left:0;padding-right:1em}.wp-block-quote:where(.has-text-align-center){border:none;padding-left:0}.wp-block-quote.is-large,.wp-block-quote.is-style-large,.wp-block-quote:where(.is-style-plain){border:none}.wp-block-search .wp-block-search__label{font-weight:700}.wp-block-search__button{border:1px solid #ccc;padding:.375em .625em}:where(.wp-block-group.has-background){padding:1.25em 2.375em}.wp-block-separator.has-css-opacity{opacity:.4}.wp-block-separator{border:none;border-bottom:2px solid;margin-left:auto;margin-right:auto}.wp-block-separator.has-alpha-channel-opacity{opacity:1}.wp-block-separator:not(.is-style-wide):not(.is-style-dots){width:100px}.wp-block-separator.has-background:not(.is-style-dots){border-bottom:none;height:1px}.wp-block-separator.has-background:not(.is-style-wide):not(.is-style-dots){height:2px}.wp-block-table{margin:0 0 1em}.wp-block-table td,.wp-block-table th{word-break:normal}.wp-block-table :where(figcaption){color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-table :where(figcaption){color:#ffffffa6}.wp-block-video :where(figcaption){color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-video :where(figcaption){color:#ffffffa6}.wp-block-video{margin:0 0 1em}:root :where(.wp-block-template-part.has-background){margin-bottom:0;margin-top:0;padding:1.25em 2.375em}
-</style>
-<style id='classic-theme-styles-inline-css' type='text/css'>
-/*! This file is auto-generated */
-.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
-</style>
-<style id='global-styles-inline-css' type='text/css'>
-:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
-:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
-:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
-:root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}
-</style>
-<link rel='stylesheet' id='redux-extendify-styles-css' href='https://mughende-women.org/wp-content/plugins/redux-framework/redux-core/assets/css/extendify-utilities.css?ver=4.4.1' type='text/css' media='all' />
-<link rel='stylesheet' id='elementor-icons-css' href='https://mughende-women.org/wp-content/plugins/elementor/assets/lib/eicons/css/elementor-icons.min.css?ver=5.15.0' type='text/css' media='all' />
-<link rel='stylesheet' id='elementor-frontend-css' href='https://mughende-women.org/wp-content/plugins/elementor/assets/css/frontend-lite.min.css?ver=3.6.4' type='text/css' media='all' />
-<link rel='stylesheet' id='elementor-post-1236-css' href='https://mughende-women.org/wp-content/uploads/elementor/css/post-1236.css?ver=1716793208' type='text/css' media='all' />
-<link rel='stylesheet' id='gva-element-base-css' href='https://mughende-women.org/wp-content/plugins/qempo-themer/elementor/assets/css/base.css?ver=6.7.1' type='text/css' media='all' />
-<link rel='stylesheet' id='elementor-pro-css' href='https://mughende-women.org/wp-content/plugins/elementor-pro/assets/css/frontend-lite.min.css?ver=3.6.5' type='text/css' media='all' />
-<link rel='stylesheet' id='font-awesome-5-all-css' href='https://mughende-women.org/wp-content/plugins/elementor/assets/lib/font-awesome/css/all.min.css?ver=3.6.4' type='text/css' media='all' />
-<link rel='stylesheet' id='font-awesome-4-shim-css' href='https://mughende-women.org/wp-content/plugins/elementor/assets/lib/font-awesome/css/v4-shims.min.css?ver=3.6.4' type='text/css' media='all' />
-<link rel='stylesheet' id='elementor-post-18-css' href='https://mughende-women.org/wp-content/uploads/elementor/css/post-18.css?ver=1716794859' type='text/css' media='all' />
-<link rel='stylesheet' id='qempo-fonts-css' href='https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;800&#038;family=Poppins:wght@600&#038;display=swap' type='text/css' media='all' />
-<link rel='stylesheet' id='dashicons-css' href='https://mughende-women.org/wp-includes/css/dashicons.min.css?ver=6.7.1' type='text/css' media='all' />
-<link rel='stylesheet' id='owl-carousel-css' href='https://mughende-women.org/wp-content/themes/qempo/js/owl-carousel/assets/owl.carousel.css?ver=6.7.1' type='text/css' media='all' />
-<link rel='stylesheet' id='magnific-css' href='https://mughende-women.org/wp-content/themes/qempo/js/magnific/magnific-popup.css?ver=6.7.1' type='text/css' media='all' />
-<link rel='stylesheet' id='fontawesome-css' href='https://mughende-women.org/wp-content/themes/qempo/css/fontawesome/css/all.css?ver=6.7.1' type='text/css' media='all' />
-<link rel='stylesheet' id='line-awesome-css' href='https://mughende-women.org/wp-content/themes/qempo/css/line-awesome/css/line-awesome.min.css?ver=6.7.1' type='text/css' media='all' />
-<link rel='stylesheet' id='qempo-style-css' href='https://mughende-women.org/wp-content/themes/qempo/style.css?ver=6.7.1' type='text/css' media='all' />
-<link rel='stylesheet' id='bootstrap-css' href='https://mughende-women.org/wp-content/themes/qempo/css/bootstrap.css?ver=1.2.1' type='text/css' media='all' />
-<link rel='stylesheet' id='qempo-template-css' href='https://mughende-women.org/wp-content/themes/qempo/css/template.css?ver=1.2.1' type='text/css' media='all' />
-<link rel='stylesheet' id='elementor-post-56-css' href='https://mughende-women.org/wp-content/uploads/elementor/css/post-56.css?ver=1716793209' type='text/css' media='all' />
-<link rel='stylesheet' id='qempo-custom-style-color-css' href='https://mughende-women.org/wp-content/themes/qempo/css/custom_script.css?ver=6.7.1' type='text/css' media='all' />
-<style id='qempo-custom-style-color-inline-css' type='text/css'>
- :root{--qempo-link-color: #000000; }
-</style>
-<style id='rocket-lazyload-inline-css' type='text/css'>
-.rll-youtube-player{position:relative;padding-bottom:56.23%;height:0;overflow:hidden;max-width:100%;}.rll-youtube-player:focus-within{outline: 2px solid currentColor;outline-offset: 5px;}.rll-youtube-player iframe{position:absolute;top:0;left:0;width:100%;height:100%;z-index:100;background:0 0}.rll-youtube-player img{bottom:0;display:block;left:0;margin:auto;max-width:100%;width:100%;position:absolute;right:0;top:0;border:none;height:auto;-webkit-transition:.4s all;-moz-transition:.4s all;transition:.4s all}.rll-youtube-player img:hover{-webkit-filter:brightness(75%)}.rll-youtube-player .play{height:100%;width:100%;left:0;top:0;position:absolute;background:url(https://mughende-women.org/wp-content/plugins/wp-rocket/assets/img/youtube.png) no-repeat center;background-color: transparent !important;cursor:pointer;border:none;}
-</style>
-<link rel='stylesheet' id='google-fonts-1-css' href='https://fonts.googleapis.com/css?family=Roboto%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRoboto+Slab%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&#038;display=auto&#038;ver=6.7.1' type='text/css' media='all' />
-<link rel='stylesheet' id='elementor-icons-shared-0-css' href='https://mughende-women.org/wp-content/plugins/elementor/assets/lib/font-awesome/css/fontawesome.min.css?ver=5.15.3' type='text/css' media='all' />
-<link rel='stylesheet' id='elementor-icons-fa-solid-css' href='https://mughende-women.org/wp-content/plugins/elementor/assets/lib/font-awesome/css/solid.min.css?ver=5.15.3' type='text/css' media='all' />
-<script type="text/javascript" src="https://mughende-women.org/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js"></script>
-<script type="text/javascript" src="https://mughende-women.org/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" id="jquery-migrate-js"></script>
-<script type="text/javascript" src="https://mughende-women.org/wp-content/plugins/elementor/assets/lib/font-awesome/js/v4-shims.min.js?ver=3.6.4" id="font-awesome-4-shim-js"></script>
-<script type="text/javascript" src="https://mughende-women.org/wp-content/themes/qempo/js/bootstrap.min.js?ver=6.7.1" id="bootstrap-js"></script>
-<script type="text/javascript" src="https://mughende-women.org/wp-content/themes/qempo/js/perfect-scrollbar.jquery.min.js?ver=6.7.1" id="perfect-scrollbar-js"></script>
-<script type="text/javascript" src="https://mughende-women.org/wp-content/themes/qempo/js/magnific/jquery.magnific-popup.min.js?ver=6.7.1" id="jquery-magnific-popup-js"></script>
-<script type="text/javascript" src="https://mughende-women.org/wp-content/themes/qempo/js/jquery.cookie.js?ver=6.7.1" id="jquery-cookie-js"></script>
-<script type="text/javascript" src="https://mughende-women.org/wp-content/themes/qempo/js/owl-carousel/owl.carousel.min.js?ver=6.7.1" id="owl-carousel-js"></script>
-<script type="text/javascript" src="https://mughende-women.org/wp-content/themes/qempo/js/jquery.appear.js?ver=6.7.1" id="jquery-appear-js"></script>
-<script type="text/javascript" src="https://mughende-women.org/wp-content/themes/qempo/js/smooth-scroll.js?ver=6.7.1" id="smooth-scroll-js"></script>
-<script type="text/javascript" src="https://mughende-women.org/wp-includes/js/imagesloaded.min.js?ver=5.0.0" id="imagesloaded-js"></script>
-<script type="text/javascript" src="https://mughende-women.org/wp-includes/js/masonry.min.js?ver=4.2.2" id="masonry-js"></script>
-<script type="text/javascript" src="https://mughende-women.org/wp-includes/js/jquery/jquery.masonry.min.js?ver=3.1.2b" id="jquery-masonry-js"></script>
-<script type="text/javascript" src="https://mughende-women.org/wp-content/themes/qempo/js/main.js?ver=6.7.1" id="qempo-main-js"></script>
-<link rel="https://api.w.org/" href="https://mughende-women.org/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://mughende-women.org/wp-json/wp/v2/pages/18" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://mughende-women.org/xmlrpc.php?rsd" />
-<meta name="generator" content="WordPress 6.7.1" />
-<link rel='shortlink' href='index.html' />
-<meta name="generator" content="Redux 4.4.1" /><!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-99SPSD1PC3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-99SPSD1PC3');
-</script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-80CXLYPR2W"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-80CXLYPR2W');
-</script><script> var ajaxurl = "https://mughende-women.org/wp-admin/admin-ajax.php";</script><script> var ajaxurl = "https://mughende-women.org/wp-admin/admin-ajax.php";</script><style type="text/css" id="custom-background-css">
-body.custom-background { background-color: #ededed; }
-</style>
-	<meta name="generator" content="Powered by Slider Revolution 6.5.20 - responsive, Mobile-Friendly Slider Plugin for WordPress with comfortable drag and drop interface." />
-<link rel="icon" href="https://mughende-women.org/wp-content/uploads/2020/12/cropped-logo-2222-FINAL-32x32.png" sizes="32x32" />
-<link rel="icon" href="https://mughende-women.org/wp-content/uploads/2020/12/cropped-logo-2222-FINAL-192x192.png" sizes="192x192" />
-<link rel="apple-touch-icon" href="https://mughende-women.org/wp-content/uploads/2020/12/cropped-logo-2222-FINAL-180x180.png" />
-<meta name="msapplication-TileImage" content="https://mughende-women.org/wp-content/uploads/2020/12/cropped-logo-2222-FINAL-270x270.png" />
-<script>function setREVStartSize(e){
-			//window.requestAnimationFrame(function() {
-				window.RSIW = window.RSIW===undefined ? window.innerWidth : window.RSIW;
-				window.RSIH = window.RSIH===undefined ? window.innerHeight : window.RSIH;
-				try {
-					var pw = document.getElementById(e.c).parentNode.offsetWidth,
-						newh;
-					pw = pw===0 || isNaN(pw) ? window.RSIW : pw;
-					e.tabw = e.tabw===undefined ? 0 : parseInt(e.tabw);
-					e.thumbw = e.thumbw===undefined ? 0 : parseInt(e.thumbw);
-					e.tabh = e.tabh===undefined ? 0 : parseInt(e.tabh);
-					e.thumbh = e.thumbh===undefined ? 0 : parseInt(e.thumbh);
-					e.tabhide = e.tabhide===undefined ? 0 : parseInt(e.tabhide);
-					e.thumbhide = e.thumbhide===undefined ? 0 : parseInt(e.thumbhide);
-					e.mh = e.mh===undefined || e.mh=="" || e.mh==="auto" ? 0 : parseInt(e.mh,0);
-					if(e.layout==="fullscreen" || e.l==="fullscreen")
-						newh = Math.max(e.mh,window.RSIH);
-					else{
-						e.gw = Array.isArray(e.gw) ? e.gw : [e.gw];
-						for (var i in e.rl) if (e.gw[i]===undefined || e.gw[i]===0) e.gw[i] = e.gw[i-1];
-						e.gh = e.el===undefined || e.el==="" || (Array.isArray(e.el) && e.el.length==0)? e.gh : e.el;
-						e.gh = Array.isArray(e.gh) ? e.gh : [e.gh];
-						for (var i in e.rl) if (e.gh[i]===undefined || e.gh[i]===0) e.gh[i] = e.gh[i-1];
-											
-						var nl = new Array(e.rl.length),
-							ix = 0,
-							sl;
-						e.tabw = e.tabhide>=pw ? 0 : e.tabw;
-						e.thumbw = e.thumbhide>=pw ? 0 : e.thumbw;
-						e.tabh = e.tabhide>=pw ? 0 : e.tabh;
-						e.thumbh = e.thumbhide>=pw ? 0 : e.thumbh;
-						for (var i in e.rl) nl[i] = e.rl[i]<window.RSIW ? 0 : e.rl[i];
-						sl = nl[0];
-						for (var i in nl) if (sl>nl[i] && nl[i]>0) { sl = nl[i]; ix=i;}
-						var m = pw>(e.gw[ix]+e.tabw+e.thumbw) ? 1 : (pw-(e.tabw+e.thumbw)) / (e.gw[ix]);
-						newh =  (e.gh[ix] * m) + (e.tabh + e.thumbh);
-					}
-					var el = document.getElementById(e.c);
-					if (el!==null && el) el.style.height = newh+"px";
-					el = document.getElementById(e.c+"_wrapper");
-					if (el!==null && el) {
-						el.style.height = newh+"px";
-						el.style.display = "block";
-					}
-				} catch(e){
-					console.log("Failure at Presize of Slider:" + e)
-				}
-			//});
-		  };</script>
-<noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript></head>
-
-<body class="home page-template-default page page-id-18 custom-background elementor-default elementor-kit-1236 elementor-page elementor-page-18">
-  	  	<div class="wrapper-page"> <!--page-->
-	 		 
-	 	<header class="header-builder-frontend header-position-absolute">
-			
-<div class="header-mobile d-xl-none d-lg-none d-md-block d-sm-block d-xs-block">
-  	
-  		
-
-  	<div class="header-mobile-content">
-		<div class="header-content-inner clearfix"> 
-		 
-		  	<div class="header-left">
-				<div class="logo-mobile">
-									  	<a href="index.html">
-					 	<img src="https://mughende-women.org/wp-content/uploads/2020/12/Mughende-Women-Farmers-Association-MUWOFA-logo-mobile-1.png" alt="Mughende Women Farmers Association (MUWOFA)" />
-				  	</a>
-				</div>
-		  	</div>
-
-		  	<div class="header-right">
-
-				<div class="main-search gva-search">
-					<a class="control-search">
-					  <i class="icon fi flaticon-magnifying-glass"></i>
-					</a>
-					<div class="gva-search-content search-content">
-					  	<div class="search-content-inner">
-						 	<div class="content-inner"><form method="get" class="searchform gva-main-search" action="https://mughende-women.org/">
-	<div class="gva-search">
-		<input name="s" maxlength="40" class="form-control input-large input-search" type="text" size="20" placeholder="Search your keyword...">
-      <span class="input-group-addon input-large btn-search">
-			<input type="submit" class="las" value="&#xf002;" />
-		</span>
-	</div>
-</form>
-
-
-</div>  
-					  	</div>  
-					</div>
-			 	</div>
-			 	
-				<div class="canvas-mobile">
-  <div class="canvas-menu gva-offcanvas">
-      <a class="dropdown-toggle" data-canvas=".mobile" href="#"><i class="icon las la-bars"></i></a>
-  </div>
-  <div class="gva-offcanvas-content mobile">
-    <div class="top-canvas">
-              <a class="logo-mm" href="index.html">
-        <img src="https://mughende-women.org/wp-content/uploads/2020/12/Mughende-Women-Farmers-Association-MUWOFA-logo-mobile-1.png" alt="Mughende Women Farmers Association (MUWOFA)" />
-        </a>
-      <a class="control-close-mm" href="#"><i class="far fa-times-circle"></i></a>
-    </div>
-    <div class="wp-sidebar sidebar">
-      <div id="gva-mobile-menu" class="navbar-collapse"><ul id="menu-main-menu" class="gva-nav-menu gva-mobile-menu"><li id="menu-item-1201" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-18 current_page_item menu-item-1201"><a href="https://mughende-women.org/"><span class="menu-title">Home</span></a></li>
-<li id="menu-item-3241" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3241"><a href="activities.html"><span class="menu-title">Activities</span></a></li>
-<li id="menu-item-3234" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-3234 megamenu-main"><a href="#"><span class="menu-title">Community Works</span><span class="caret"></span></a><div class="megamenu-wrap-inner submenu-inner megamenu-align-center" style="width: 680px;">
-<ul class="megamenu-sub megamenu-columns-2">
-	<li id="menu-item-3235" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3235"><a href="work.html"><span class="menu-title">Community Works</span></a></li>
-	
-</ul>
-</div></li>
-<li id="menu-item-3729" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3729"><a href="events.html"><span class="menu-title">Events</span></a></li>
-<li id="menu-item-3252" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3252"><a href="corevalues.html"><span class="menu-title">Core Values</span></a></li>
-<li id="menu-item-3237" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3237"><a href="impact.html"><span class="menu-title">Our Impact</span></a></li>
-<li id="menu-item-1196" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1196"><a href="volunteer.html"><span class="menu-title">Volunteer</span></a></li>
-<li id="menu-item-2520" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2520"><a href="contact.html"><span class="menu-title">Contact Us</span></a></li>
-<li id="menu-item-1199" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1199"><a href="about.html"><span class="menu-title">About</span></a></li>
-<li id="menu-item-2519" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2519"><a href="donate.html"><span class="menu-title">Donate</span></a></li>
-</ul></div>      <div class="after-offcanvas">
-              </div>    
-    </div>
-  </div>
-</div>
-		  	</div>
-
-		</div>  
-  	</div>
-</div>			<div class="header-builder-inner">
-				<div class="d-none d-xl-block d-lg-block">
-				 	<div class="header-main-wrapper">		<div data-elementor-type="wp-post" data-elementor-id="56" class="elementor elementor-56">
-									<section class="elementor-section elementor-top-section elementor-element elementor-element-2d2b905 gv-sticky-menu elementor-section-full_width elementor-section-stretched elementor-section-height-default elementor-section-height-default row-top" data-id="2d2b905" data-element_type="section" data-settings="{&quot;stretch_section&quot;:&quot;section-stretched&quot;,&quot;background_background&quot;:&quot;classic&quot;}">
-						<div class="elementor-container elementor-column-gap-no">
-					<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-be8a239 column-style-top" data-id="be8a239" data-element_type="column">
-			<div class="elementor-widget-wrap elementor-element-populated">
-								<div class="elementor-element elementor-element-cd10e54 elementor-widget elementor-widget-image" data-id="cd10e54" data-element_type="widget" data-widget_type="image.default">
-				<div class="elementor-widget-container">
-			<style>/*! elementor - v3.6.4 - 13-04-2022 */
-.elementor-widget-image{text-align:center}.elementor-widget-image a{display:inline-block}.elementor-widget-image a img[src$=".svg"]{width:48px}.elementor-widget-image img{vertical-align:middle;display:inline-block}</style>												<img width="500" height="500" src="https://mughende-women.org/wp-content/uploads/2020/12/Mughende-Women-Farmers-Association-MUWOFA.png" class="attachment-full size-full" alt="Mughende Women Farmers Association (MUWOFA)" srcset="https://mughende-women.org/wp-content/uploads/2020/12/Mughende-Women-Farmers-Association-MUWOFA.png 500w, https://mughende-women.org/wp-content/uploads/2020/12/Mughende-Women-Farmers-Association-MUWOFA-180x180.png 180w, https://mughende-women.org/wp-content/uploads/2020/12/Mughende-Women-Farmers-Association-MUWOFA-300x300.png 300w" sizes="(max-width: 500px) 100vw, 500px" />															</div>
-				</div>
-					</div>
-		</div>
-				<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-f4c060c column-style-top" data-id="f4c060c" data-element_type="column">
-			<div class="elementor-widget-wrap elementor-element-populated">
-								<div class="elementor-element elementor-element-611e29ac elementor-widget elementor-widget-gva-navigation-menu" data-id="611e29ac" data-element_type="widget" data-widget_type="gva-navigation-menu.default">
-				<div class="elementor-widget-container">
-			<div class="gva-element-gva-navigation-menu gva-element">   <div class="gva-navigation-menu  menu-align-center">
-      <div class="menu-main-menu-container"><ul id="menu-oc3y" class="gva-nav-menu gva-main-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-18 current_page_item menu-item-1201"><a href="https://mughende-women.org/"><span class="menu-title">Home</span></a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3241"><a href="activities.html"><span class="menu-title">Activities</span></a></li>
-<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-3234 megamenu-main"><a href="#"><span class="menu-title">Community Works</span><span class="caret"></span></a><div class="megamenu-wrap-inner submenu-inner megamenu-align-center" style="width: 680px;">
-<ul class="megamenu-sub megamenu-columns-2">
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3235"><a href="work.html"><span class="menu-title">Community Works</span></a></li>
-	
-</div></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3729"><a href="events.html"><span class="menu-title">Events</span></a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3252"><a href="corevalues.html"><span class="menu-title">Core Values</span></a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3237"><a href="impact.html"><span class="menu-title">Our Impact</span></a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1196"><a href="volunteer.html"><span class="menu-title">Volunteer</span></a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2520"><a href="contact.html"><span class="menu-title">Contact Us</span></a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1199"><a href="about.html"><span class="menu-title">About</span></a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2519"><a href="donate.html"><span class="menu-title">Donate</span></a></li>
-</ul></div>   </div></div>		</div>
-				</div>
-					</div>
-		</div>
-				<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-a8b287c column-style-top" data-id="a8b287c" data-element_type="column">
-			<div class="elementor-widget-wrap elementor-element-populated">
-								<div class="elementor-element elementor-element-be56e14 elementor-align-center elementor-widget elementor-widget-button" data-id="be56e14" data-element_type="widget" data-widget_type="button.default">
-				<div class="elementor-widget-container">
-					<div class="elementor-button-wrapper">
-			<a href="https://www.mughende-women.org/donate/" class="elementor-button-link elementor-button elementor-size-sm" role="button">
-						<span class="elementor-button-content-wrapper">
-						<span class="elementor-button-text">DONATE</span>
-		</span>
-					</a>
-		</div>
-				</div>
-				</div>
-					</div>
-		</div>
-							</div>
-		</section>
-							</div>
-		</div>			  	</div> 
-			</div>  
-	 	</header>
-
-	 		 
-	 	<div id="page-content"> <!--page content-->
-
-
-
-  <div id="wp-main-content" class="clearfix main-page">
-  <div class="disable-breadcrumb clearfix"></div>      <div class="container-layout-content container-full">
-    <div class="content-page-wrap">
-             <div class="main-page-content base-layout row has-no-sidebar">
-          
-            <div class="content-page col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <div class="content-page-inner">   
-                      <div class="clearfix post-18 page type-page status-publish hentry" id="18">
-
-         
-        
-        		<div data-elementor-type="wp-page" data-elementor-id="18" class="elementor elementor-18">
-									<section class="elementor-section elementor-top-section elementor-element elementor-element-765bb37c elementor-section-full_width elementor-section-height-default elementor-section-height-default row-top" data-id="765bb37c" data-element_type="section">
-						<div class="elementor-container elementor-column-gap-default">
-					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-4142e75 column-style-top" data-id="4142e75" data-element_type="column">
-			<div class="elementor-widget-wrap elementor-element-populated">
-								<div class="elementor-element elementor-element-0ae416d elementor-widget elementor-widget-gva-rev-slider" data-id="0ae416d" data-element_type="widget" data-widget_type="gva-rev-slider.default">
-				<div class="elementor-widget-container">
-			<div class="gva-element-gva-rev-slider gva-element">
-			<!-- START Slider I REVOLUTION SLIDER 6.5.20 --><p class="rs-p-wp-fix"></p>
-			<rs-module-wrap id="rev_slider_1_1_wrapper" data-source="gallery" style="visibility:hidden;background:transparent;padding:0;margin:0px auto;margin-top:0;margin-bottom:0;max-width:100%;">
-				<rs-module id="rev_slider_1_1" style="" data-version="6.5.20">
-					<rs-slides>
-						<rs-slide style="position: absolute;" data-key="rs-1" data-title="Slide" data-anim="ms:2000;" data-in="prst:rndany;o:0;" data-out="a:false;" data-d3="f:fly;d:vertical;z:400;e:power2.out;su:true;" data-alttrans="random-premium,random">
-							<img src="log.png" alt="slider_1" title="slider_1" width="1200" height="800" class="rev-slidebg tp-rs-img rs-lazyload" data-lazyload="//www.mughende-women.org/wp-content/uploads/2020/12/slider_1-1.webp" data-parallax="9" data-no-retina>
-<!--
-							--><a
-								id="slider-1-slide-1-layer-3" 
-								class="rs-layer btn-slider-theme rev-btn"
-								href="volunteer.html" target="_blank" rel="nofollow noopener"
-								data-type="button"
-								data-rsp_ch="on"
-								data-xy="xo:15px,15px,15px,10px;y:m;yo:29px,154px,121px,88px;"
-								data-text="w:normal;s:14,14,14,12;l:14,10,40,32;ls:0px,1px,1px,0px;fw:600;"
-								data-dim="minh:0px,none,none,none;"
-								data-padding="t:24,19,3,3;r:42,33,20,15;b:24,19,3,3;l:42,33,20,15;"
-								data-border="bor:30px,30px,30px,30px;"
-								data-frame_0="x:left;skX:85;"
-								data-frame_1="st:730;sp:1000;sR:730;"
-								data-frame_999="o:0;st:w;sR:7270;"
-								data-frame_hover="c:#0c0004;bgc:#fff;bor:30px,30px,30px,30px;bri:120%;"
-								style="z-index:9;background-color:#185b0f;font-family:'Poppins';"
-							>JOIN US 
-							</a><!--
-
-							--><rs-layer
-								id="slider-1-slide-1-layer-5" 
-								data-type="text"
-								data-rsp_ch="on"
-								data-xy="xo:15px,11px,8px,5px;yo:322px,302px,207px,125px;"
-								data-text="w:normal;s:20,15,18,14;l:28,21,25,20;"
-								data-frame_1="e:power4.inOut;st:560;sp:1200;sR:560;"
-								data-frame_1_sfx="se:blocktoright;"
-								data-frame_999="o:0;st:w;sR:7240;"
-								style="z-index:15;font-family:'Roboto';"
-							>Join the journey of the Mughende Women Farmers Association (MUWOFA) as we sow seeds of empowerment and harvest hope. Our collective<br> unites women farmers, providing resources, knowledge, and support to transform lives and landscapes. Together, we're growing stronger <br>communities and a brighter future. 
-							</rs-layer><!--
-
-							--><a
-								id="slider-1-slide-1-layer-10" 
-								class="rs-layer btn-slider-white rev-btn"
-								href="https://www.mughende-women.org/donate/" target="_blank" rel="nofollow noopener"
-								data-type="button"
-								data-color="#070346||#00000c||#00000c||#00000c"
-								data-rsp_ch="on"
-								data-xy="xo:185px,170px,146px,106px;y:m;yo:29px,154px,119px,88px;"
-								data-text="w:normal;s:14,14,14,12;l:14,10,40,32;ls:0px,1px,1px,0px;fw:600;"
-								data-dim="minh:0px,none,none,none;"
-								data-padding="t:24,19,3,3;r:42,33,20,15;b:24,19,3,3;l:42,33,20,15;"
-								data-border="bor:30px,30px,30px,30px;"
-								data-frame_0="x:left;skX:85;"
-								data-frame_1="st:1100;sp:1000;sR:1100;"
-								data-frame_999="o:0;st:w;sR:6900;"
-								data-frame_hover="c:#fff;bgc:#00664c;bor:30px,30px,30px,30px;bri:120%;"
-								style="z-index:8;background-color:#ffffff;font-family:'Poppins';"
-							>DONATE 
-							</a><!--
-
-							--><rs-layer
-								id="slider-1-slide-1-layer-12" 
-								data-type="text"
-								data-rsp_ch="on"
-								data-xy="xo:11px,15px,10px,10px;y:t,t,t,m;yo:226px,139px,81px,-101px;"
-								data-text="w:normal;s:52,50,52,25;l:100,80,55,38;ls:-3px,-3px,-2px,-1px;fw:600;"
-								data-frame_0="o:1;"
-								data-frame_0_chars="d:5;o:0;rX:90deg;oZ:-50;"
-								data-frame_1="st:880;sp:1750;sR:880;"
-								data-frame_1_chars="e:power4.inOut;d:10;oZ:-50;"
-								data-frame_999="o:0;st:w;sR:4370;"
-								style="z-index:14;font-family:'Poppins';"
-							>Cultivating Change with MUWOFA 
-							</rs-layer><!--
--->						</rs-slide>
-					</rs-slides>
-				</rs-module>
-				<script>
-					setREVStartSize({c: 'rev_slider_1_1',rl:[1240,1024,778,480],el:[900,650,480,350],gw:[1320,1024,778,480],gh:[900,650,480,350],type:'standard',justify:'',layout:'fullwidth',mh:"0"});if (window.RS_MODULES!==undefined && window.RS_MODULES.modules!==undefined && window.RS_MODULES.modules["revslider11"]!==undefined) {window.RS_MODULES.modules["revslider11"].once = false;window.revapi1 = undefined;if (window.RS_MODULES.checkMinimal!==undefined) window.RS_MODULES.checkMinimal()}
-				</script>
-			</rs-module-wrap>
-			<!-- END REVOLUTION SLIDER -->
-</div>		</div>
-				</div>
-					</div>
-		</div>
-							</div>
-		</section>
-				<section class="elementor-section elementor-top-section elementor-element elementor-element-c1de4ce elementor-section-boxed elementor-section-height-default elementor-section-height-default row-top" data-id="c1de4ce" data-element_type="section">
-						<div class="elementor-container elementor-column-gap-default">
-					<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-b40279e column-style-top" data-id="b40279e" data-element_type="column">
-			<div class="elementor-widget-wrap elementor-element-populated">
-								<div class="elementor-element elementor-element-c3ea33e elementor-widget elementor-widget-gva-image-content" data-id="c3ea33e" data-element_type="widget" data-widget_type="gva-image-content.default">
-				<div class="elementor-widget-container">
-			<div class="gva-element-gva-image-content gva-element">		
-			<div class="gsc-image-content skin-v1">
-		  		  			 <div class="image">
-				<img decoding="async" src="https://www.mughende-women.org/wp-content/uploads/2023/05/Kyakimwa-Miria-MUWOFA-Secretary-receiving-an-Award.webp" alt="Kyakimwa Miria MUWOFA Secretary receiving an Award" title="Home 1">  
-				<div class="shape-1"></div>
-			 </div>
-		  
-		  			 <div class="image-second">
-				<div class="image-second-inner">
-				  <img decoding="async" src="https://www.mughende-women.org/wp-content/uploads/2023/05/muwofa_logo.webp" alt="muwofa logo" title="Home 2">  
-				</div>  
-			 </div>
-		    		    
-			
-			<div class="shape-2"></div>
-		</div>
-	  
-	 
-	 
-
-	
- </div>		</div>
-				</div>
-					</div>
-		</div>
-				<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-8f17d5f column-style-top" data-id="8f17d5f" data-element_type="column">
-			<div class="elementor-widget-wrap elementor-element-populated">
-								<div class="elementor-element elementor-element-e4ad0fb elementor-widget elementor-widget-gva-heading-block" data-id="e4ad0fb" data-element_type="widget" data-widget_type="gva-heading-block.default">
-				<div class="elementor-widget-container">
-			<div class="gva-element-gva-heading-block gva-element">      <div class="align-left style-1 widget gsc-heading box-align-left auto-responsive">
-      <div class="content-inner">
-         
-                  
-                     <div class="sub-title"><span>About</span></div>
-           
-         
-                     <h2 class="title">
-               <span>Mughende Women Farmers Association (MUWOFA)</span>
-            </h2>
-                              <div class="title-desc">Mughende Women Farmers Association (MUWOFA) started in the year 1997
-by the group of 30 women as founders. The association started with an aim
-to fight poverty among members and even in entire community of Kinyamaseke and Rwenzori region through savings and credit, tree planting, sustainable agriculture,
-and domestic violence prevention</div>
-         
-         
-      </div>
-   </div>
-   
-    </div>		</div>
-				</div>
-				<div class="elementor-element elementor-element-a0baaff elementor-widget-divider--view-line elementor-widget elementor-widget-divider" data-id="a0baaff" data-element_type="widget" data-widget_type="divider.default">
-				<div class="elementor-widget-container">
-			<style>/*! elementor - v3.6.4 - 13-04-2022 */
-.elementor-widget-divider{--divider-border-style:none;--divider-border-width:1px;--divider-color:#2c2c2c;--divider-icon-size:20px;--divider-element-spacing:10px;--divider-pattern-height:24px;--divider-pattern-size:20px;--divider-pattern-url:none;--divider-pattern-repeat:repeat-x}.elementor-widget-divider .elementor-divider{display:-webkit-box;display:-ms-flexbox;display:flex}.elementor-widget-divider .elementor-divider__text{font-size:15px;line-height:1;max-width:95%}.elementor-widget-divider .elementor-divider__element{margin:0 var(--divider-element-spacing);-ms-flex-negative:0;flex-shrink:0}.elementor-widget-divider .elementor-icon{font-size:var(--divider-icon-size)}.elementor-widget-divider .elementor-divider-separator{display:-webkit-box;display:-ms-flexbox;display:flex;margin:0;direction:ltr}.elementor-widget-divider--view-line_icon .elementor-divider-separator,.elementor-widget-divider--view-line_text .elementor-divider-separator{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.elementor-widget-divider--view-line_icon .elementor-divider-separator:after,.elementor-widget-divider--view-line_icon .elementor-divider-separator:before,.elementor-widget-divider--view-line_text .elementor-divider-separator:after,.elementor-widget-divider--view-line_text .elementor-divider-separator:before{display:block;content:"";border-bottom:0;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;border-top:var(--divider-border-width) var(--divider-border-style) var(--divider-color)}.elementor-widget-divider--element-align-left .elementor-divider .elementor-divider-separator>.elementor-divider__svg:first-of-type{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:100;flex-shrink:100}.elementor-widget-divider--element-align-left .elementor-divider-separator:before{content:none}.elementor-widget-divider--element-align-left .elementor-divider__element{margin-left:0}.elementor-widget-divider--element-align-right .elementor-divider .elementor-divider-separator>.elementor-divider__svg:last-of-type{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:100;flex-shrink:100}.elementor-widget-divider--element-align-right .elementor-divider-separator:after{content:none}.elementor-widget-divider--element-align-right .elementor-divider__element{margin-right:0}.elementor-widget-divider:not(.elementor-widget-divider--view-line_text):not(.elementor-widget-divider--view-line_icon) .elementor-divider-separator{border-top:var(--divider-border-width) var(--divider-border-style) var(--divider-color)}.elementor-widget-divider--separator-type-pattern{--divider-border-style:none}.elementor-widget-divider--separator-type-pattern.elementor-widget-divider--view-line .elementor-divider-separator,.elementor-widget-divider--separator-type-pattern:not(.elementor-widget-divider--view-line) .elementor-divider-separator:after,.elementor-widget-divider--separator-type-pattern:not(.elementor-widget-divider--view-line) .elementor-divider-separator:before,.elementor-widget-divider--separator-type-pattern:not([class*=elementor-widget-divider--view]) .elementor-divider-separator{width:100%;min-height:var(--divider-pattern-height);-webkit-mask-size:var(--divider-pattern-size) 100%;mask-size:var(--divider-pattern-size) 100%;-webkit-mask-repeat:var(--divider-pattern-repeat);mask-repeat:var(--divider-pattern-repeat);background-color:var(--divider-color);-webkit-mask-image:var(--divider-pattern-url);mask-image:var(--divider-pattern-url)}.elementor-widget-divider--no-spacing{--divider-pattern-size:auto}.elementor-widget-divider--bg-round{--divider-pattern-repeat:round}.rtl .elementor-widget-divider .elementor-divider__text{direction:rtl}</style>		<div class="elementor-divider">
-			<span class="elementor-divider-separator">
-						</span>
-		</div>
-				</div>
-				</div>
-					</div>
-		</div>
-							</div>
-		</section>
-		 <div class="scrolling-container">
-    <div class="image-track">
-      <div class="image-item">
-        <img src="director.jpg"height="300" width="300"alt="Image 1">
-        <p class="description">Director MUWOFA</p>
-      </div>
-      <div class="image-item">
-        <img src="director.jpg"height="300" width="300" alt="Image 2">
-        <p class="description">Kobusinge Jemimah<br>Executive Director MUWOFA</p>
-      </div>
-      <div class="image-item">
-        <img src="secretary.jpg" height="300" width="300"alt="Image 3">
-        <p class="description">Kyakimwa Miria<br>Secretary microfinance-MUWOFA</p>
-      </div>
-      <div class="image-item">
-        <img src="team.jpg" height="300" width="300"alt="Image 4">
-        <p class="description">2024-Bakery Training beneficieries</p>
-      </div>
-      <div class="image-item">
-        <img src="logo.jpg" height="300" width="300"alt="Image 4">
-        <p class="description">Marie Shlei Association-Our longtime partner</p>
-      </div>	    
-      <div class="image-item">
-        <img src="new 1.jpg" height="300" width="300"alt="Image 4">
-        <p class="description">Max Stadler with MUWOFA members</p>
-      </div>
-      <div class="image-item">
-        <img src="pic1.jpeg" height="300" width="300"alt="Image 4">
-        <p class="description">Claus Oellerking with MUWOFA members</p>
-      </div>
-      <div class="image-item">
-        <img src="pic2.jpeg" height="300" width="300"alt="Image 4">
-        <p class="description">Happy MUWOFA members in garden</p>
-      </div>
-      <div class="image-item">
-        <img src="pic3.jpeg" height="300" width="300"alt="Image 4">
-        <p class="description">Simple meeting of MUWOFA members</p>
-      </div>
-      <div class="image-item">
-        <img src="pic4.jpeg" height="300" width="300"alt="Image 4">
-        <p class="description">Max Stadler at MUWOFA greenhouse</p>
-      </div>
-      <div class="image-item">
-        <img src="pic5.jpg" height="300" width="300"alt="Image 4">
-        <p class="description">MUWOFA members carrying out a project</p>
-      </div>
-      <div class="image-item">
-        <img src="pic6.jpg" height="300" width="300"alt="Image 4">
-        <p class="description">Max Stadler with the Executive director</p>
-      </div>
-      <div class="image-item">
-        <img src="pic7.jpeg" height="300" width="300"alt="Image 4">
-        <p class="description">Max Stadler with MUWOFA Microfinance Secretary</p>
-      </div>
-      <div class="image-item">
-        <img src="pic8.jpeg" height="300" width="300"alt="Image 4">
-        <p class="description">MUWOFA members on Covid-19 sensitization</p>
-      </div>	    
-      <div class="image-item">
-        <img src="pic9.jpeg" height="300" width="300"alt="Image 4">
-        <p class="description">MUWOFA members</p>
-      </div>	    
-      <div class="image-item">
-        <img src="pic11.jpg" height="300" width="300"alt="Image 4">
-        <p class="description">MUWOFA members thanking MSV</p>
-      </div>	    
-      <div class="image-item">
-        <img src="pic12.jpg" height="300" width="300"alt="Image 4">
-      </div>	    
-      <div class="image-item">
-        <img src="pic13.jpg" height="300" width="300"alt="Image 4">
-        
-      </div>
-      <div class="image-item">
-        <img src="pic13.jpg" height="300" width="300"alt="Image 4">
-        
-      </div>	
-      <div class="image-item">
-        <img src="pic13.jpg" height="300" width="300"alt="Image 4">
-        
-      </div>		    
-	    
-	    
-      <!-- Add more image items as needed -->
-    </div>
-  </div>
-  		
-      <!-- Add more image items as needed -->
-    </div>
-  </div>				
-
-  <script>
-    const imageTrack = document.querySelector('.image-track');
-
-    imageTrack.addEventListener('mouseover', () => {
-      imageTrack.style.animationPlayState = 'paused';
-    });
-
-    imageTrack.addEventListener('mouseout', () => {
-      imageTrack.style.animationPlayState = 'running';
-    });
-  </script>
-				<section class="elementor-section elementor-top-section elementor-element elementor-element-f105788 elementor-section-full_width elementor-section-stretched elementor-section-height-default elementor-section-height-default row-top" data-id="f105788" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;stretch_section&quot;:&quot;section-stretched&quot;}">
-						<div class="elementor-container elementor-column-gap-no">
-					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-b51d696 column-style-top" data-id="b51d696" data-element_type="column">
-			<div class="elementor-widget-wrap elementor-element-populated">
-								<div class="elementor-element elementor-element-6b4f80c elementor-widget elementor-widget-gva-heading-block" data-id="6b4f80c" data-element_type="widget" data-widget_type="gva-heading-block.default">
-				<div class="elementor-widget-container">
-			<div class="gva-element-gva-heading-block gva-element">      <div class="align-center style-1 widget gsc-heading box-align-center auto-responsive">
-      <div class="content-inner">
-         
-                  
-           
-         
-                     <h2 class="title">
-               <span>Our Activities</span>
-            </h2>
-                  
-         
-      </div>
-   </div>
-   
-    </div>		</div>
-				</div>
-					</div>
-		</div>
-							</div>
-		</section>
-				<section class="elementor-section elementor-top-section elementor-element elementor-element-c96854c elementor-section-boxed elementor-section-height-default elementor-section-height-default row-top" data-id="c96854c" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
-						<div class="elementor-container elementor-column-gap-default">
-					<div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-ccdf200 column-style-top" data-id="ccdf200" data-element_type="column">
-			<div class="elementor-widget-wrap elementor-element-populated">
-								<div class="elementor-element elementor-element-83d4010 elementor-position-top elementor-vertical-align-top elementor-widget elementor-widget-image-box" data-id="83d4010" data-element_type="widget" data-widget_type="image-box.default">
-				<div class="elementor-widget-container">
-			<style>/*! elementor - v3.6.4 - 13-04-2022 */
-.elementor-widget-image-box .elementor-image-box-content{width:100%}@media (min-width:768px){.elementor-widget-image-box.elementor-position-left .elementor-image-box-wrapper,.elementor-widget-image-box.elementor-position-right .elementor-image-box-wrapper{display:-webkit-box;display:-ms-flexbox;display:flex}.elementor-widget-image-box.elementor-position-right .elementor-image-box-wrapper{text-align:right;-webkit-box-orient:horizontal;-webkit-box-direction:reverse;-ms-flex-direction:row-reverse;flex-direction:row-reverse}.elementor-widget-image-box.elementor-position-left .elementor-image-box-wrapper{text-align:left;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row}.elementor-widget-image-box.elementor-position-top .elementor-image-box-img{margin:auto}.elementor-widget-image-box.elementor-vertical-align-top .elementor-image-box-wrapper{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.elementor-widget-image-box.elementor-vertical-align-middle .elementor-image-box-wrapper{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.elementor-widget-image-box.elementor-vertical-align-bottom .elementor-image-box-wrapper{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}}@media (max-width:767px){.elementor-widget-image-box .elementor-image-box-img{margin-left:auto!important;margin-right:auto!important;margin-bottom:15px}}.elementor-widget-image-box .elementor-image-box-img{display:inline-block}.elementor-widget-image-box .elementor-image-box-title a{color:inherit}.elementor-widget-image-box .elementor-image-box-wrapper{text-align:center}.elementor-widget-image-box .elementor-image-box-description{margin:0}</style><div class="elementor-image-box-wrapper"><figure class="elementor-image-box-img"><img decoding="async" width="800" height="600" src="https://mughende-women.org/wp-content/uploads/2023/05/Kobusinge-Jemimah-the-MUWOFA-Trainer.webp" class="attachment-full size-full" alt="Kobusinge Jemimah the MUWOFA Trainer" title="Home 3"></figure><div class="elementor-image-box-content"><p class="elementor-image-box-description">Teaching women how to grow healthy food was the association's first activity. They focus on small-scale horticulture; the sustainable, organic cultivation of vitamin-rich vegetables such as cabbage and eggplant. During training vegetable gardening, women learn to work a piece of land in a natural way. The vegetables are for personal use and for sale on the market.
-</p></div></div>		</div>
-				</div>
-				<div class="elementor-element elementor-element-a6257dd elementor-align-center elementor-widget elementor-widget-button" data-id="a6257dd" data-element_type="widget" data-widget_type="button.default">
-				<div class="elementor-widget-container">
-					<div class="elementor-button-wrapper">
-			<a href="https://www.mughende-women.org/donate/" class="elementor-button-link elementor-button elementor-size-sm" role="button">
-						<span class="elementor-button-content-wrapper">
-						<span class="elementor-button-text">SUPPORT US</span>
-		</span>
-					</a>
-		</div>
-				</div>
-				</div>
-					</div>
-		</div>
-				<div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-23248e0 column-style-top" data-id="23248e0" data-element_type="column">
-			<div class="elementor-widget-wrap elementor-element-populated">
-								<div class="elementor-element elementor-element-8aaeae1 elementor-position-top elementor-vertical-align-top elementor-widget elementor-widget-image-box" data-id="8aaeae1" data-element_type="widget" data-widget_type="image-box.default">
-				<div class="elementor-widget-container">
-			<div class="elementor-image-box-wrapper"><figure class="elementor-image-box-img"><img decoding="async" width="700" height="550" src="https://mughende-women.org/wp-content/uploads/2023/05/job_training_women-1.webp" class="attachment-full size-full" alt="job_training_women" title="Home 4"></figure><div class="elementor-image-box-content"><p class="elementor-image-box-description">MUWOFA's target group consists of vulnerable women in the wider region around the city of Kasese: orphan girls, girls with a disability, pregnant teenagers, early school leavers, victims of domestic violence, single mothers and widows, together around 3000 women. Muwofa encourages the women to develop and offers help and a safe place.</p></div></div>		</div>
-				</div>
-				<div class="elementor-element elementor-element-3b13e32 elementor-align-center elementor-widget elementor-widget-button" data-id="3b13e32" data-element_type="widget" data-widget_type="button.default">
-				<div class="elementor-widget-container">
-					<div class="elementor-button-wrapper">
-			<a href="https://www.mughende-women.org/donate/" class="elementor-button-link elementor-button elementor-size-sm" role="button">
-						<span class="elementor-button-content-wrapper">
-						<span class="elementor-button-text">SUPPORT US</span>
-		</span>
-					</a>
-		</div>
-				</div>
-				</div>
-					</div>
-		</div>
-				<div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-7eebdb9 column-style-top" data-id="7eebdb9" data-element_type="column">
-			<div class="elementor-widget-wrap elementor-element-populated">
-								<div class="elementor-element elementor-element-0747ae8 elementor-position-top elementor-vertical-align-top elementor-widget elementor-widget-image-box" data-id="0747ae8" data-element_type="widget" data-widget_type="image-box.default">
-				<div class="elementor-widget-container">
-			<div class="elementor-image-box-wrapper"><figure class="elementor-image-box-img"><img decoding="async" width="800" height="600" src="https://mughende-women.org/wp-content/uploads/2023/05/women_job_training-2.webp" class="attachment-full size-full" alt="women job training 2" title="Home 5"></figure><div class="elementor-image-box-content"><p class="elementor-image-box-description">Training courses in carpentry, breeding dairy goats, plumbing, beekeeping, fish farming, shoemaking, manufacturing liquid soap and bars of soap, making
-clothes, sewing covers for motorcycle saddles and car seats, making bags and belts, welding, basket weaving, accounting, catering, electronics and art and
-design.</p></div></div>		</div>
-				</div>
-				<div class="elementor-element elementor-element-a7fb35b elementor-align-center elementor-widget elementor-widget-button" data-id="a7fb35b" data-element_type="widget" data-widget_type="button.default">
-				<div class="elementor-widget-container">
-					<div class="elementor-button-wrapper">
-			<a href="https://www.mughende-women.org/donate/" class="elementor-button-link elementor-button elementor-size-sm" role="button">
-						<span class="elementor-button-content-wrapper">
-						<span class="elementor-button-text">SUPPORT US</span>
-		</span>
-					</a>
-		</div>
-				</div>
-				</div>
-					</div>
-		</div>
-				<div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-3fffd9e column-style-top" data-id="3fffd9e" data-element_type="column">
-			<div class="elementor-widget-wrap elementor-element-populated">
-								<div class="elementor-element elementor-element-cf08b19 elementor-position-top elementor-vertical-align-top elementor-widget elementor-widget-image-box" data-id="cf08b19" data-element_type="widget" data-widget_type="image-box.default">
-				<div class="elementor-widget-container">
-			<div class="elementor-image-box-wrapper"><figure class="elementor-image-box-img"><img decoding="async" width="800" height="600" src="https://mughende-women.org/wp-content/uploads/2023/05/women_job_training-2.webp" class="attachment-full size-full" alt="women job training 2" title="Home 5"></figure><div class="elementor-image-box-content"><p class="elementor-image-box-description">Training courses in carpentry, breeding dairy goats, plumbing, beekeeping, fish farming, shoemaking, manufacturing liquid soap and bars of soap, making
-clothes, sewing covers for motorcycle saddles and car seats, making bags and belts, welding, basket weaving, accounting, catering, electronics and art and
-design.</p></div></div>		</div>
-				</div>
-				<div class="elementor-element elementor-element-b4a8be8 elementor-align-center elementor-widget elementor-widget-button" data-id="b4a8be8" data-element_type="widget" data-widget_type="button.default">
-				<div class="elementor-widget-container">
-					<div class="elementor-button-wrapper">
-			<a href="https://www.mughende-women.org/donate/" class="elementor-button-link elementor-button elementor-size-sm" role="button">
-						<span class="elementor-button-content-wrapper">
-						<span class="elementor-button-text">SUPPORT US</span>
-		</span>
-					</a>
-		</div>
-				</div>
-				</div>
-					</div>
-		</div>
-							</div>
-		</section>
-
-
-				<body>
-  
-    <!-- Projects Section -->
-    <section class="main-section">
-    <!-- Intro Section -->
-    <div class="intro">
-        <div class="intro-header">
-            <img src="logo.jpg" height="300" width="300" alt="Marie Schlei Association Logo" class="logo">
-            <h2>Marie Schlei Association</h2>
-        </div>
-        <p>Promoting Women Economic Empowerment through composting, kitchen gardening, and training for safe and sustainable food production in Kinyamaseke.</p>
-        <p>Increased nutrition and food production has paved the way for surplus sales, raising women’s household income levels and reducing poverty.</p>
-        <p>Key benefits include:</p>
-        <ul>
-            <li>Improved food security through maintained soil fertility.</li>
-            <li>Diversified vegetable crops using affordable inputs.</li>
-            <li>Creation of employment and environmental regeneration.</li>
-        </ul>
-    </div>
-
-    <!-- Projects Section -->
-    <div class="projects">
-        <div class="project-card">
-            <img src="shlei1.webp" height="320" width="180" alt="Project Image">
-            <h3>Project Marie Schlei Association</h3>
-            <p>Promoting Women Economic Empowerment through composting and kitchen gardening...</p>
-            <a href="#" class="btn">Learn More</a>
-        </div>
-        <div class="project-card">
-            <img src="shlei2.webp" height="320" width="180" alt="Job Training Image">
-            <h3>Job Training Of Women</h3>
-            <p>Facilitating women's economic independence with valuable skills and strategies...</p>
-            <a href="#" class="btn">Learn More</a>
-        </div>
-        <div class="project-card">
-            <img src="shlei3.webp" height="320" width="180" alt="Vegetable Growing">
-            <h3>Vegetable Growing and Training</h3>
-            <p>Supporting legumes growing to promote sustainable agriculture...</p>
-            <a href="#" class="btn">Learn More</a>
-        </div>
-    </div>
-</section>
-
-</body>
-				<section class="elementor-section elementor-top-section elementor-element elementor-element-2af027d elementor-section-boxed elementor-section-height-default elementor-section-height-default row-top" data-id="2af027d" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
-						<div class="elementor-container elementor-column-gap-default">
-					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-4143109 column-style-top" data-id="4143109" data-element_type="column">
-			<div class="elementor-widget-wrap elementor-element-populated">
-								<div class="elementor-element elementor-element-94d9cac elementor-widget elementor-widget-heading" data-id="94d9cac" data-element_type="widget" data-widget_type="heading.default">
-				<div class="elementor-widget-container">
-			<h2 class="elementor-heading-title elementor-size-default">Community Works and Achievements</h2>		</div>
-				</div>
-				<section class="elementor-section elementor-inner-section elementor-element elementor-element-af6169c elementor-section-boxed elementor-section-height-default elementor-section-height-default row-top" data-id="af6169c" data-element_type="section">
-						<div class="elementor-container elementor-column-gap-default">
-					<div class="elementor-column elementor-col-20 elementor-inner-column elementor-element elementor-element-53a87a0 column-style-top" data-id="53a87a0" data-element_type="column">
-			<div class="elementor-widget-wrap elementor-element-populated">
-								<div class="elementor-element elementor-element-c7e22ae elementor-position-top elementor-vertical-align-top elementor-widget elementor-widget-image-box" data-id="c7e22ae" data-element_type="widget" data-widget_type="image-box.default">
-				<div class="elementor-widget-container">
-			<div class="elementor-image-box-wrapper"><figure class="elementor-image-box-img"><img decoding="async" width="700" height="550" src="https://mughende-women.org/wp-content/uploads/2023/05/covid_19_essentials_supply.webp" class="attachment-full size-full" alt="covid_19_essentials_supply" title="Home 10"></figure><div class="elementor-image-box-content"><h3 class="elementor-image-box-title">Covid 19 Aid</h3><p class="elementor-image-box-description">With support from Marie Schlei Association (MSA) MUWOFA members were supplied with soap, liquid soap, masks, hand washing utilities, temperature guns, sanitizer and many others, in Kinyamaseke 1 as measure to fight the spread of Covid 19</p></div></div>		</div>
-				</div>
-				<div class="elementor-element elementor-element-08a21f3 elementor-align-center elementor-widget elementor-widget-button" data-id="08a21f3" data-element_type="widget" data-widget_type="button.default">
-				<div class="elementor-widget-container">
-					<div class="elementor-button-wrapper">
-			<a href="https://www.mughende-women.org/covid-19-aid/" class="elementor-button-link elementor-button elementor-size-sm elementor-animation-pulse" role="button">
-						<span class="elementor-button-content-wrapper">
-						<span class="elementor-button-text">Learn More</span>
-		</span>
-					</a>
-		</div>
-				</div>
-				</div>
-					</div>
-		</div>
-				<div class="elementor-column elementor-col-20 elementor-inner-column elementor-element elementor-element-c99775b column-style-top" data-id="c99775b" data-element_type="column">
-			<div class="elementor-widget-wrap elementor-element-populated">
-								<div class="elementor-element elementor-element-ac1543b elementor-position-top elementor-vertical-align-top elementor-widget elementor-widget-image-box" data-id="ac1543b" data-element_type="widget" data-widget_type="image-box.default">
-				<div class="elementor-widget-container">
-			<div class="elementor-image-box-wrapper"><figure class="elementor-image-box-img"><img decoding="async" width="700" height="550" src="https://mughende-women.org/wp-content/uploads/2023/05/women_goat_rearing-3.webp" class="attachment-full size-full" alt="women_goat_rearing (3)" title="Home 11"></figure><div class="elementor-image-box-content"><h3 class="elementor-image-box-title">Women Goat Rearing</h3><p class="elementor-image-box-description">Goat rearing is very key in fighting poverty  among women and fighting malnutrition among children.</p></div></div>		</div>
-				</div>
-				<div class="elementor-element elementor-element-55d8abb elementor-align-center elementor-widget elementor-widget-button" data-id="55d8abb" data-element_type="widget" data-widget_type="button.default">
-				<div class="elementor-widget-container">
-					<div class="elementor-button-wrapper">
-			<a href="https://www.mughende-women.org/goat-rearing/" class="elementor-button-link elementor-button elementor-size-sm elementor-animation-pulse" role="button">
-						<span class="elementor-button-content-wrapper">
-						<span class="elementor-button-text">Learn More</span>
-		</span>
-					</a>
-		</div>
-				</div>
-				</div>
-					</div>
-		</div>
-				<div class="elementor-column elementor-col-20 elementor-inner-column elementor-element elementor-element-6788bf9 column-style-top" data-id="6788bf9" data-element_type="column">
-			<div class="elementor-widget-wrap elementor-element-populated">
-								<div class="elementor-element elementor-element-ae0b8e2 elementor-position-top elementor-vertical-align-top elementor-widget elementor-widget-image-box" data-id="ae0b8e2" data-element_type="widget" data-widget_type="image-box.default">
-				<div class="elementor-widget-container">
-			<div class="elementor-image-box-wrapper"><figure class="elementor-image-box-img"><img decoding="async" width="700" height="550" src="https://mughende-women.org/wp-content/uploads/2023/05/green_house_construction_for_women.webp" class="attachment-full size-full" alt="green house construction for women" title="Home 12"></figure><div class="elementor-image-box-content"><h3 class="elementor-image-box-title">Green House Construction</h3><p class="elementor-image-box-description">Goat rearing is very key in fighting poverty  among women and fighting malnutrition among children.</p></div></div>		</div>
-				</div>
-				<div class="elementor-element elementor-element-bd68b62 elementor-align-center elementor-widget elementor-widget-button" data-id="bd68b62" data-element_type="widget" data-widget_type="button.default">
-				<div class="elementor-widget-container">
-					<div class="elementor-button-wrapper">
-			<a href="https://www.mughende-women.org/green-house-construction/" class="elementor-button-link elementor-button elementor-size-sm elementor-animation-pulse" role="button">
-						<span class="elementor-button-content-wrapper">
-						<span class="elementor-button-text">Learn More</span>
-		</span>
-					</a>
-		</div>
-				</div>
-				</div>
-					</div>
-		</div>
-				<div class="elementor-column elementor-col-20 elementor-inner-column elementor-element elementor-element-8118ad8 column-style-top" data-id="8118ad8" data-element_type="column">
-			<div class="elementor-widget-wrap elementor-element-populated">
-								<div class="elementor-element elementor-element-a77aef1 elementor-position-top elementor-vertical-align-top elementor-widget elementor-widget-image-box" data-id="a77aef1" data-element_type="widget" data-widget_type="image-box.default">
-				<div class="elementor-widget-container">
-			<div class="elementor-image-box-wrapper"><figure class="elementor-image-box-img"><img decoding="async" width="700" height="550" src="https://mughende-women.org/wp-content/uploads/2023/05/muwofa_women_receiving_gardening_tools-12-3.webp" class="attachment-full size-full" alt="muwofa women receiving gardening tools 12 3" title="Home 13"></figure><div class="elementor-image-box-content"><h3 class="elementor-image-box-title">Supply of Farming Tools</h3><p class="elementor-image-box-description">Members from our organization supplying women in Kinyamaseke with farming tools</p></div></div>		</div>
-				</div>
-				<div class="elementor-element elementor-element-d58b3fe elementor-align-center elementor-widget elementor-widget-button" data-id="d58b3fe" data-element_type="widget" data-widget_type="button.default">
-				<div class="elementor-widget-container">
-					<div class="elementor-button-wrapper">
-			<a href="https://www.mughende-women.org/supply-of-farming-tools/" class="elementor-button-link elementor-button elementor-size-sm elementor-animation-pulse" role="button">
-						<span class="elementor-button-content-wrapper">
-						<span class="elementor-button-text">Learn More</span>
-		</span>
-					</a>
-		</div>
-				</div>
-				</div>
-					</div>
-		</div>
-				<div class="elementor-column elementor-col-20 elementor-inner-column elementor-element elementor-element-aafbbe6 column-style-top" data-id="aafbbe6" data-element_type="column">
-			<div class="elementor-widget-wrap elementor-element-populated">
-								<div class="elementor-element elementor-element-21dbe45 elementor-position-top elementor-vertical-align-top elementor-widget elementor-widget-image-box" data-id="21dbe45" data-element_type="widget" data-widget_type="image-box.default">
-				<div class="elementor-widget-container">
-			<div class="elementor-image-box-wrapper"><figure class="elementor-image-box-img"><img decoding="async" width="700" height="550" src="https://mughende-women.org/wp-content/uploads/2023/06/DSC_1090-3.webp" class="attachment-full size-full" alt="DSC 1090 3" title="Home 14"></figure><div class="elementor-image-box-content"><h3 class="elementor-image-box-title">Training vulnerable women</h3><p class="elementor-image-box-description">Mughende Women Farmers Association (MUWOFA) training vulnerable women in Kinyamaseke 1 to grow healthy food for improved nutrition and economic growth.</p></div></div>		</div>
-				</div>
-				<div class="elementor-element elementor-element-f1ec182 elementor-align-center elementor-widget elementor-widget-button" data-id="f1ec182" data-element_type="widget" data-widget_type="button.default">
-				<div class="elementor-widget-container">
-					<div class="elementor-button-wrapper">
-			<a href="https://www.mughende-women.org/training-vulnerable-women-in-kinyamaseke-1-to-grow-healthy-food/" class="elementor-button-link elementor-button elementor-size-sm elementor-animation-pulse" role="button">
-						<span class="elementor-button-content-wrapper">
-						<span class="elementor-button-text">Learn More</span>
-		</span>
-					</a>
-		</div>
-				</div>
-				</div>
-					</div>
-		</div>
-							</div>
-		</section>
-				<section class="elementor-section elementor-inner-section elementor-element elementor-element-a84bd6a elementor-section-boxed elementor-section-height-default elementor-section-height-default row-top" data-id="a84bd6a" data-element_type="section">
-						<div class="elementor-container elementor-column-gap-default">
-					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-f8250d1 column-style-top" data-id="f8250d1" data-element_type="column">
-			<div class="elementor-widget-wrap elementor-element-populated">
-								<div class="elementor-element elementor-element-f8ecc9a elementor-position-top elementor-vertical-align-top elementor-widget elementor-widget-image-box" data-id="f8ecc9a" data-element_type="widget" data-widget_type="image-box.default">
-				<div class="elementor-widget-container">
-			<div class="elementor-image-box-wrapper"><figure class="elementor-image-box-img"><img decoding="async" width="700" height="550" src="https://mughende-women.org/wp-content/uploads/2023/05/seed_legumes.webp" class="attachment-full size-full" alt="seed_legumes" title="Home 15"></figure><div class="elementor-image-box-content"><h3 class="elementor-image-box-title">Seed Legumes</h3><p class="elementor-image-box-description">Supporting Legumes growing in Kinyamaseke 1.
-The legumes help to fix nitrogen</p></div></div>		</div>
-				</div>
-				<div class="elementor-element elementor-element-df1cadb elementor-align-center elementor-widget elementor-widget-button" data-id="df1cadb" data-element_type="widget" data-widget_type="button.default">
-				<div class="elementor-widget-container">
-					<div class="elementor-button-wrapper">
-			<a href="https://www.mughende-women.org/seed-legumes/" class="elementor-button-link elementor-button elementor-size-sm elementor-animation-pulse" role="button">
-						<span class="elementor-button-content-wrapper">
-						<span class="elementor-button-text">Learn More</span>
-		</span>
-					</a>
-		</div>
-				</div>
-				</div>
-					</div>
-		</div>
-				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-3ec7d03 column-style-top" data-id="3ec7d03" data-element_type="column">
-			<div class="elementor-widget-wrap elementor-element-populated">
-								<div class="elementor-element elementor-element-f22ee22 elementor-position-top elementor-vertical-align-top elementor-widget elementor-widget-image-box" data-id="f22ee22" data-element_type="widget" data-widget_type="image-box.default">
-				<div class="elementor-widget-container">
-			<div class="elementor-image-box-wrapper"><figure class="elementor-image-box-img"><img decoding="async" width="700" height="550" src="https://mughende-women.org/wp-content/uploads/2023/05/women_in_kinyamaseke_receiving_exotic_goats-3.webp" class="attachment-full size-full" alt="women_in_kinyamaseke_receiving_exotic_goats (3)" title="Home 16"></figure><div class="elementor-image-box-content"><h3 class="elementor-image-box-title">Supply of exotic Goats to women</h3><p class="elementor-image-box-description">Goat rearing is very key in fighting poverty  among women and fighting malnutrition among children.</p></div></div>		</div>
-				</div>
-				<div class="elementor-element elementor-element-24b757d elementor-align-center elementor-widget elementor-widget-button" data-id="24b757d" data-element_type="widget" data-widget_type="button.default">
-				<div class="elementor-widget-container">
-					<div class="elementor-button-wrapper">
-			<a href="https://www.mughende-women.org/supply-of-exotic-goats-to-women/" class="elementor-button-link elementor-button elementor-size-sm elementor-animation-pulse" role="button">
-						<span class="elementor-button-content-wrapper">
-						<span class="elementor-button-text">Learn More</span>
-		</span>
-					</a>
-		</div>
-				</div>
-				</div>
-					</div>
-		</div>
-							</div>
-		</section>
-					</div>
-		</div>
-							</div>
-		</section>
-				<div class="container">
-  <div class="header">MUWOFA Images</div>
-
-  <div class="category">
-    <div class="category-header">
-      <span>Kyakimwa Miria watering her vegetables</span>
-      <div class="arrow">▼</div>
-    </div>
-    <div class="images">
-      <img src="email1.JPG" alt="Category 1 Image 1">
-      <img src="email2.JPG" alt="Category 1 Image 2">
-      <img src="email3.JPG" alt="Category 1 Image 3">
-      <img src="email4.JPG" alt="Category 1 Image 4">
-      <img src="email1.JPG" alt="Category 1 Image 5">
-    </div>
-  </div>
-
-  <div class="category">
-    <div class="category-header">
-      <span>Onion demo garden</span>
-      <div class="arrow">▼</div>
-    </div>
-    <div class="images">
-      <img src="email7.JPG" alt="Category 2 Image 1">
-      <img src="email6.JPG" alt="Category 2 Image 2">
-      <img src="email7.JPG" alt="Category 2 Image 3">
-      <img src="email8.JPG" alt="Category 2 Image 4">
-      <img src="email7.JPG" alt="Category 2 Image 5">
-    </div>
-  </div>
-
-  <div class="category">
-    <div class="category-header">
-      <span>Category 3</span>
-      <div class="arrow">▼</div>
-    </div>
-    <div class="images">
-      <img src="photo6.jpg" alt="Category 3 Image 1">
-      <img src="photo7.jpg" alt="Category 3 Image 2">
-      <img src="photo9.jpg" alt="Category 3 Image 3">
-      <img src="email13.jpg" alt="Category 3 Image 4">
-      <img src="email14.jpg" alt="Category 3 Image 5">
-    </div>
-  </div>
-
-  <div class="category">
-    <div class="category-header">
-      <span>Category 4</span>
-      <div class="arrow">▼</div>
-    </div>
-    <div class="images">
-      <img src="pic1.jpeg" alt="Category 4 Image 1">
-      <img src="pic2.jpeg" alt="Category 4 Image 2">
-      <img src="pic3.jpeg" alt="Category 4 Image 3">
-      <img src="pic4.jpeg" alt="Category 4 Image 4">
-      <img src="pic5.jpeg" alt="Category 4 Image 5">
-    </div>
-  </div>
-</div>
-				<section class="elementor-section elementor-top-section elementor-element elementor-element-45aa81f elementor-section-boxed elementor-section-height-default elementor-section-height-default row-top" data-id="45aa81f" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
-						<div class="elementor-container elementor-column-gap-default">
-					<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-6a6fc20 column-style-top" data-id="6a6fc20" data-element_type="column">
-			<div class="elementor-widget-wrap elementor-element-populated">
-								<div class="elementor-element elementor-element-b7cda0c elementor-view-default elementor-mobile-position-top elementor-vertical-align-top elementor-widget elementor-widget-icon-box" data-id="b7cda0c" data-element_type="widget" data-widget_type="icon-box.default">
-				<div class="elementor-widget-container">
-			<link rel="stylesheet" href="https://www.mughende-women.org/wp-content/plugins/elementor/assets/css/widget-icon-box.min.css">		<div class="elementor-icon-box-wrapper">
-						<div class="elementor-icon-box-icon">
-				<span class="elementor-icon elementor-animation-" >
-				<i aria-hidden="true" class="fas fa-location-arrow"></i>				</span>
-			</div>
-						<div class="elementor-icon-box-content">
-				<h3 class="elementor-icon-box-title">
-					<span  >
-						Location					</span>
-				</h3>
-									<p class="elementor-icon-box-description">
-						P.O.BOX 468
-Kinyamaseke 1 Cell, Kinyamaseke North Ward,
-Kinyamaseke Town Council, Kasese district
-Uganda					</p>
-							</div>
-		</div>
-				</div>
-				</div>
-					</div>
-		</div>
-				<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-a942959 column-style-top" data-id="a942959" data-element_type="column">
-			<div class="elementor-widget-wrap elementor-element-populated">
-								<div class="elementor-element elementor-element-10f4f56 elementor-view-default elementor-mobile-position-top elementor-vertical-align-top elementor-widget elementor-widget-icon-box" data-id="10f4f56" data-element_type="widget" data-widget_type="icon-box.default">
-				<div class="elementor-widget-container">
-					<div class="elementor-icon-box-wrapper">
-						<div class="elementor-icon-box-icon">
-				<span class="elementor-icon elementor-animation-" >
-				<i aria-hidden="true" class="fas fa-phone-alt"></i>				</span>
-			</div>
-						<div class="elementor-icon-box-content">
-				<h3 class="elementor-icon-box-title">
-					<span  >
-						Phone Number					</span>
-				</h3>
-									<p class="elementor-icon-box-description">
-						+256 (0)777308364					</p>
-							</div>
-		</div>
-				</div>
-				</div>
-					</div>
-		</div>
-				<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-04f4225 column-style-top" data-id="04f4225" data-element_type="column">
-			<div class="elementor-widget-wrap elementor-element-populated">
-								<div class="elementor-element elementor-element-faf5d4f elementor-view-default elementor-mobile-position-top elementor-vertical-align-top elementor-widget elementor-widget-icon-box" data-id="faf5d4f" data-element_type="widget" data-widget_type="icon-box.default">
-				<div class="elementor-widget-container">
-					<div class="elementor-icon-box-wrapper">
-						<div class="elementor-icon-box-icon">
-				<a class="elementor-icon elementor-animation-" href="mailto:mughendewomen@gmail.com">
-				<i aria-hidden="true" class=" flaticon-email-2"></i>				</a>
-			</div>
-						<div class="elementor-icon-box-content">
-				<h3 class="elementor-icon-box-title">
-					<a href="mailto:%20mughendewomen@gmail.com" >
-						Email					</a>
-				</h3>
-									<p class="elementor-icon-box-description">
-						 mughendewomen@gmail.com<br>miria@mughende-women.org<br>admin@mughende-women.org					</p>
-							</div>
-		</div>
-				</div>
-				</div>
-					</div>
-		</div>
-							</div>
-		</section>
-							</div>
-			      <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Statistics Counter</title>
+    <title>Mughende Women Farmers Association (MUWOFA)</title>
+    <meta name="description" content="MUWOFA empowers women farmers in Uganda through sustainable agriculture, training, and community development initiatives.">
     <style>
-        /* General Styles */
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
+        /* CSS Variables */
+        :root {
+            --primary-color: #2e7d32;
+            --secondary-color: #4caf50;
+            --accent-color: #185b0f;
+            --light-color: #f0f9f0;
+            --dark-color: #1b5e20;
+            --text-color: #333;
+            --light-text: #fff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        /* Reset and Base Styles */
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
-	    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background-color: #f4f4f4;
-    }
 
-    .scrolling-container {
-      overflow: hidden;
-      width: 100%;
-      position: relative;
-      background-color: #fff;
-    }
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+            overflow-x: hidden;
+        }
 
-    .image-track {
-      display: flex;
-      animation: scroll 25s linear infinite;
-    }
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
 
-    .image-item {
-      flex-shrink: 0;
-      margin: 10px;
-      text-align: center;
-    }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
 
-    .image-item img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      display: block;
-      margin: 0 auto;
-    }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
 
-    .description {
-      margin-top: 5px;
-      font-size: 19px;
-      max-width: 90%;
-      margin-left: auto;
-      margin-right: auto;
-      text-shadow: bisque;
-      font-weight: bolder;
-    }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-    @keyframes scroll {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(-100%);
-      }
-    }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
 
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .image-item img {
-        width: 80%;
-      }
-    }
+        .btn:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
 
+        .btn-light {
+            background-color: var(--light-text);
+            color: var(--primary-color);
+        }
+
+        .btn-light:hover {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            margin: 15px auto 0;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--light-text);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo img {
+            height: 60px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-menu li {
+            margin: 0 15px;
+            position: relative;
+        }
+
+        .nav-menu a {
+            font-weight: 500;
+            padding: 10px 0;
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-menu .submenu {
+            position: absolute;
+            background-color: var(--light-text);
+            box-shadow: var(--shadow);
+            width: 200px;
+            padding: 10px 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            top: 100%;
+            left: 0;
+        }
+
+        .nav-menu li:hover .submenu {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .nav-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .donate-btn {
+            margin-left: 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800"><rect width="1200" height="800" fill="%232e7d32"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: var(--light-text);
+            text-align: center;
+            padding: 180px 0 100px;
+            margin-top: 80px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--light-text);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* About Section */
+        .about {
+            background-color: var(--light-color);
+        }
+
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-image {
+            flex: 1;
+            position: relative;
+        }
+
+        .about-image img {
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .about-image:before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 5px solid var(--secondary-color);
+            border-radius: 10px;
+            top: -15px;
+            left: -15px;
+            z-index: -1;
+        }
+
+        .about-content {
+            flex: 1;
+        }
+
+        /* Team Scroller */
+        .team-scroller {
+            background-color: var(--light-text);
+            padding: 40px 0;
+            overflow: hidden;
+        }
+
+        .scrolling-container {
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+        }
+
+        .image-track {
+            display: flex;
+            animation: scroll 30s linear infinite;
+        }
+
+        .image-item {
+            flex-shrink: 0;
+            margin: 10px;
+            text-align: center;
+            width: 300px;
+        }
+
+        .image-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .description {
+            margin-top: 10px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        /* Activities Section */
+        .activities {
+            background-color: var(--light-text);
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .activity-card {
+            background-color: var(--light-color);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .activity-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .activity-image {
+            height: 200px;
+            background-color: var(--secondary-color);
+        }
+
+        .activity-content {
+            padding: 20px;
+        }
+
+        /* Projects Section */
+        .projects {
+            background-color: var(--light-color);
+        }
+
+        .projects-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .intro {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 2rem;
+        }
+
+        .intro-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .intro-header .logo {
+            height: 80px;
+            width: 80px;
+            margin-right: 15px;
+        }
+
+        .projects-grid {
+            flex: 2;
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .project-card {
+            background: var(--light-text);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 1rem;
+            max-width: 350px;
+            flex: 1 1 calc(33% - 1rem);
+            text-align: left;
+        }
+
+        .project-card img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        /* Achievements Section */
+        .achievements {
+            background-color: var(--light-text);
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .achievement-card {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .achievement-icon {
+            font-size: 40px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        /* Counter Section */
         .counter-section {
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 20px;
-            padding: 50px 20px;
-            background-color: #fff;
+            padding: 50px 0;
+            background-color: var(--light-text);
         }
 
         .counter-card {
-            background-color: #4CAF50;
-            color: white;
+            background-color: var(--primary-color);
+            color: var(--light-text);
             padding: 30px;
             border-radius: 10px;
             text-align: center;
             width: 30%;
             min-width: 250px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
         }
 
         .counter-card:hover {
@@ -1409,562 +442,765 @@ Uganda					</p>
             margin-top: 10px;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .counter-card {
-                width: 45%;
-            }
+        /* Gallery Section */
+        .gallery {
+            background-color: var(--light-color);
         }
 
-        @media (max-width: 480px) {
-            .counter-card {
-                width: 100%;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="counter-section">
-    <!-- Total Users Counter -->
-    <div class="counter-card">
-        <div class="counter-number" id="total-users">200</div>
-        <div class="counter-label">Beneficiaries</div>
-    </div>
-
-    <!-- Products Sold Counter -->
-    <div class="counter-card">
-        <div class="counter-number" id="products-sold">8</div>
-        <div class="counter-label">Projects</div>
-    </div>
-
-    <!-- Website Visitors Counter -->
-    <div class="counter-card">
-        <div class="counter-number" id="website-visitors">2025</div>
-        <div class="counter-label">Current year</div>
-    </div>
-</div>
-
-<script>
-    // Function to animate the counters
-    function animateCounter(targetId, target, duration) {
-        let start = 0;
-        const step = Math.ceil(target / (duration / 50)); // Adjust for smoother animation
-        const counterElement = document.getElementById(targetId);
-
-        const interval = setInterval(() => {
-            start += step;
-            if (start >= target) {
-                clearInterval(interval);
-                counterElement.innerText = target; // Ensure it ends at the target
-            } else {
-                counterElement.innerText = start;
-            }
-        }, 50); // Update every 50 ms for smoother animation
-    }
-
-    // Start the counters with animation
-    animateCounter('total-users', 200, 20000); // 200 in 2 seconds
-    animateCounter('products-sold', 8, 20000); // 50 in 2 seconds
-    
-</script>
-<script>
-    // Function to animate years from 1997 to 2025
-    function animateYearCounter(targetId, startYear, endYear, duration) {
-        let currentYear = startYear;
-        const stepTime = Math.floor(duration / (endYear - startYear)); // Calculate time per year
-        const counterElement = document.getElementById(targetId);
-
-        const interval = setInterval(() => {
-            if (currentYear >= endYear) {
-                clearInterval(interval);
-                counterElement.innerText = endYear; // Ensure it ends at the target year
-            } else {
-                currentYear++;
-                counterElement.innerText = currentYear; // Update the displayed year
-            }
-        }, stepTime); // Update every calculated interval
-    }
-
-    // Start the counter animation for years
-    animateYearCounter('website-visitors', 1997, 2025, 9000); // Animate from 1997 to 2025 in 5 seconds
-</script>
-</body>
-</html>
-
-			      <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us</title>
-    <style>
-        /* General Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f7f7f7;
-            padding: 0 20px;
-        }
-
-        /* Contact Form Container */
-        .contact-container {
-            background: #fff;
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 30px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        .category {
+            border: 1px solid #ddd;
             border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
         }
 
-        h2 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 20px;
+        .category-header {
+            background: var(--secondary-color);
+            color: var(--light-text);
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
         }
 
-        /* Form Group Styles */
+        .category-header:hover {
+            background: var(--accent-color);
+        }
+
+        .category-header span {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .category-header .arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .category-header.active .arrow {
+            transform: rotate(180deg);
+        }
+
+        .images {
+            display: none;
+            padding: 10px;
+            background: #f1f1f1;
+        }
+
+        .images.active {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .images img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .images img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: var(--light-text);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .contact-icon {
+            font-size: 24px;
+            color: var(--primary-color);
+            min-width: 30px;
+        }
+
+        .contact-form {
+            background-color: var(--light-color);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
         .form-group {
             margin-bottom: 20px;
         }
 
-        label {
-            font-size: 16px;
-            color: #555;
+        .form-group label {
             display: block;
             margin-bottom: 5px;
+            font-weight: 500;
         }
 
-        input, textarea {
+        .form-group input,
+        .form-group textarea {
             width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            border: 2px solid #ddd;
+            padding: 12px;
+            border: 1px solid #ddd;
             border-radius: 5px;
-            margin-top: 5px;
+            font-family: inherit;
         }
 
-        input:focus, textarea:focus {
-            border-color: #4CAF50;
-            outline: none;
-        }
-
-        textarea {
+        .form-group textarea {
+            min-height: 150px;
             resize: vertical;
         }
 
-        /* Button Styles */
-        .submit-btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 15px 30px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            width: 100%;
-            cursor: pointer;
-            transition: background-color 0.3s;
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: var(--light-text);
+            padding: 60px 0 30px;
         }
 
-        .submit-btn:hover {
-            background-color: #45a049;
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
         }
 
-        /* Responsive Design */
-        @media (max-width: 600px) {
-            .contact-container {
-                padding: 20px;
+        .footer-logo img {
+            height: 80px;
+            margin-bottom: 15px;
+        }
+
+        .footer-heading {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-heading:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary-color);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-color);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .about-container {
+                flex-direction: column;
             }
+            
+            .about-image:before {
+                display: none;
+            }
+            
+            .projects-container {
+                flex-direction: column;
+            }
+            
+            .intro {
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+        }
 
-            .submit-btn {
-                padding: 12px 20px;
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                flex-direction: column;
+                background-color: var(--light-text);
+                width: 100%;
+                height: calc(100vh - 80px);
+                padding: 20px;
+                box-shadow: var(--shadow);
+                transition: var(--transition);
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-menu li {
+                margin: 10px 0;
+            }
+            
+            .nav-toggle {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .counter-card {
+                width: 100%;
+            }
+            
+            .image-item {
+                width: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 150px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .project-card {
+                flex: 1 1 100%;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="#home">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'><circle cx='250' cy='250' r='200' fill='%232e7d32'/><text x='250' y='270' font-family='Arial' font-size='100' fill='white' text-anchor='middle'>MW</text></svg>" alt="MUWOFA Logo">
+                </a>
+            </div>
+            
+            <div class="nav-toggle" id="navToggle">
+                <i>☰</i>
+            </div>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li>
+                    <a href="#activities">Activities</a>
+                    <ul class="submenu">
+                        <li><a href="#community-works">Community Works</a></li>
+                    </ul>
+                </li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#volunteer">Volunteer</a></li>
+            </ul>
+            
+            <a href="#donate" class="btn donate-btn">DONATE</a>
+        </div>
+    </header>
 
-    <div class="contact-container">
-        <h2>Contact Us</h2>
-        <form id="contact-form" action="#" method="post">
-            <div class="form-group">
-                <label for="name">Your Name</label>
-                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Cultivating Change with MUWOFA</h1>
+            <p>Mughende Women Farmers Association (MUWOFA) empowers women through sustainable agriculture, training, and community development initiatives in the Rwenzori region of Uganda.</p>
+            <div class="hero-buttons">
+                <a href="#volunteer" class="btn">JOIN US</a>
+                <a href="#donate" class="btn btn-light">DONATE</a>
             </div>
-            <div class="form-group">
-                <label for="email">Your Email</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about" id="about">
+        <div class="container">
+            <h2 class="section-title">About MUWOFA</h2>
+            <div class="about-container">
+                <div class="about-image">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'><rect width='800' height='600' fill='%234caf50'/><circle cx='400' cy='300' r='150' fill='%232e7d32'/><text x='400' y='320' font-family='Arial' font-size='60' fill='white' text-anchor='middle'>MUWOFA</text></svg>" alt="MUWOFA Team">
+                </div>
+                <div class="about-content">
+                    <h3>Mughende Women Farmers Association (MUWOFA)</h3>
+                    <p>MUWOFA started in 1997 by a group of 30 women founders with the aim to fight poverty among members and the entire community of Kinyamaseke and the Rwenzori region.</p>
+                    <p>Our initiatives include savings and credit programs, tree planting, sustainable agriculture, and domestic violence prevention. We believe in empowering women to transform their lives and communities through education, resources, and support.</p>
+                    <a href="#activities" class="btn">Learn More</a>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="message">Your Message</label>
-                <textarea id="message" name="message" rows="5" placeholder="Enter your message" required></textarea>
+        </div>
+    </section>
+
+    <!-- Team Scroller -->
+    <section class="team-scroller">
+        <div class="container">
+            <h2 class="section-title">Our Team &amp; Partners</h2>
+        </div>
+        <div class="scrolling-container">
+            <div class="image-track">
+                <div class="image-item">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'><rect width='300' height='300' fill='%232e7d32'/><circle cx='150' cy='120' r='60' fill='%234caf50'/><rect x='90' y='180' width='120' height='80' fill='%234caf50'/><text x='150' y='270' font-family='Arial' font-size='20' fill='white' text-anchor='middle'>Director</text></svg>" alt="MUWOFA Director">
+                    <p class="description">Director MUWOFA</p>
+                </div>
+                <div class="image-item">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'><rect width='300' height='300' fill='%232e7d32'/><circle cx='150' cy='120' r='60' fill='%234caf50'/><rect x='90' y='180' width='120' height='80' fill='%234caf50'/><text x='150' y='270' font-family='Arial' font-size='16' fill='white' text-anchor='middle'>Executive Director</text></svg>" alt="Executive Director">
+                    <p class="description">Kobusinge Jemimah<br>Executive Director MUWOFA</p>
+                </div>
+                <div class="image-item">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'><rect width='300' height='300' fill='%232e7d32'/><circle cx='150' cy='120' r='60' fill='%234caf50'/><rect x='90' y='180' width='120' height='80' fill='%234caf50'/><text x='150' y='270' font-family='Arial' font-size='16' fill='white' text-anchor='middle'>Secretary</text></svg>" alt="Microfinance Secretary">
+                    <p class="description">Kyakimwa Miria<br>Secretary microfinance-MUWOFA</p>
+                </div>
+                <div class="image-item">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'><rect width='300' height='300' fill='%232e7d32'/><circle cx='150' cy='120' r='60' fill='%234caf50'/><rect x='90' y='180' width='120' height='80' fill='%234caf50'/><text x='150' y='270' font-family='Arial' font-size='14' fill='white' text-anchor='middle'>Training Beneficiaries</text></svg>" alt="Training Beneficiaries">
+                    <p class="description">2024 Bakery Training beneficiaries</p>
+                </div>
+                <div class="image-item">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'><rect width='300' height='300' fill='%232e7d32'/><circle cx='150' cy='150' r='100' fill='%234caf50'/><text x='150' y='160' font-family='Arial' font-size='30' fill='white' text-anchor='middle'>MSA</text></svg>" alt="Marie Schlei Association">
+                    <p class="description">Marie Schlei Association - Our longtime partner</p>
+                </div>
             </div>
-            <a href="mailto:mughendewomen@gmail.com"><button type="submit" class="submit-btn">Send Message</button></a>
-        </form>
-    </div>
+        </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section class="section activities" id="activities">
+        <div class="container">
+            <h2 class="section-title">Our Activities</h2>
+            <div class="activities-grid">
+                <div class="activity-card">
+                    <div class="activity-image"></div>
+                    <div class="activity-content">
+                        <h3>Sustainable Agriculture</h3>
+                        <p>Teaching women how to grow healthy food through small-scale horticulture, focusing on organic cultivation of vitamin-rich vegetables for personal use and market sale.</p>
+                        <a href="#agriculture" class="btn">Learn More</a>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-image"></div>
+                    <div class="activity-content">
+                        <h3>Women Empowerment</h3>
+                        <p>Supporting vulnerable women including orphan girls, those with disabilities, pregnant teenagers, victims of domestic violence, single mothers and widows.</p>
+                        <a href="#empowerment" class="btn">Learn More</a>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-image"></div>
+                    <div class="activity-content">
+                        <h3>Vocational Training</h3>
+                        <p>Providing training in carpentry, dairy goat breeding, plumbing, beekeeping, fish farming, shoemaking, soap manufacturing, tailoring, and more.</p>
+                        <a href="#training" class="btn">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section projects" id="projects">
+        <div class="container">
+            <h2 class="section-title">Our Projects</h2>
+            <div class="projects-container">
+                <div class="intro">
+                    <div class="intro-header">
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%232e7d32'/><text x='50' y='60' font-family='Arial' font-size='30' fill='white' text-anchor='middle'>MS</text></svg>" alt="Marie Schlei Association Logo" class="logo">
+                        <h2>Marie Schlei Association</h2>
+                    </div>
+                    <p>Promoting Women Economic Empowerment through composting, kitchen gardening, and training for safe and sustainable food production in Kinyamaseke.</p>
+                    <p>Increased nutrition and food production has paved the way for surplus sales, raising women's household income levels and reducing poverty.</p>
+                    <p>Key benefits include:</p>
+                    <ul>
+                        <li>Improved food security through maintained soil fertility</li>
+                        <li>Diversified vegetable crops using affordable inputs</li>
+                        <li>Creation of employment and environmental regeneration</li>
+                    </ul>
+                </div>
+
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 350 200'><rect width='350' height='200' fill='%234caf50'/><text x='175' y='100' font-family='Arial' font-size='20' fill='white' text-anchor='middle'>Project Image</text></svg>" alt="Project Image">
+                        <h3>Project Marie Schlei Association</h3>
+                        <p>Promoting Women Economic Empowerment through composting and kitchen gardening...</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                    <div class="project-card">
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 350 200'><rect width='350' height='200' fill='%234caf50'/><text x='175' y='100' font-family='Arial' font-size='20' fill='white' text-anchor='middle'>Training Image</text></svg>" alt="Job Training Image">
+                        <h3>Job Training Of Women</h3>
+                        <p>Facilitating women's economic independence with valuable skills and strategies...</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                    <div class="project-card">
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 350 200'><rect width='350' height='200' fill='%234caf50'/><text x='175' y='100' font-family='Arial' font-size='20' fill='white' text-anchor='middle'>Vegetable Growing</text></svg>" alt="Vegetable Growing">
+                        <h3>Vegetable Growing and Training</h3>
+                        <p>Supporting legumes growing to promote sustainable agriculture...</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section class="section achievements" id="achievements">
+        <div class="container">
+            <h2 class="section-title">Community Works & Achievements</h2>
+            <div class="achievements-grid">
+                <div class="achievement-card">
+                    <div class="achievement-icon">🦠</div>
+                    <h3>COVID-19 Aid</h3>
+                    <p>Distribution of soap, masks, hand washing utilities, and sanitizers to fight the spread of COVID-19 in Kinyamaseke.</p>
+                    <a href="#covid-aid" class="btn">Learn More</a>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-icon">🐐</div>
+                    <h3>Women Goat Rearing</h3>
+                    <p>Goat rearing initiatives to fight poverty among women and malnutrition among children.</p>
+                    <a href="#goat-rearing" class="btn">Learn More</a>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-icon">🌿</div>
+                    <h3>Green House Construction</h3>
+                    <p>Building greenhouses to support year-round vegetable production and sustainable farming.</p>
+                    <a href="#greenhouse" class="btn">Learn More</a>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-icon">🛠️</div>
+                    <h3>Supply of Farming Tools</h3>
+                    <p>Providing essential farming tools to women in Kinyamaseke to improve agricultural productivity.</p>
+                    <a href="#farming-tools" class="btn">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Counter Section -->
+    <section class="counter-section">
+        <div class="container">
+            <div class="counter-card">
+                <div class="counter-number" id="total-users">200</div>
+                <div class="counter-label">Beneficiaries</div>
+            </div>
+            <div class="counter-card">
+                <div class="counter-number" id="products-sold">8</div>
+                <div class="counter-label">Projects</div>
+            </div>
+            <div class="counter-card">
+                <div class="counter-number" id="website-visitors">2025</div>
+                <div class="counter-label">Current Year</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section gallery" id="gallery">
+        <div class="container">
+            <h2 class="section-title">MUWOFA Images</h2>
+            
+            <div class="category">
+                <div class="category-header">
+                    <span>Kyakimwa Miria watering her vegetables</span>
+                    <div class="arrow">▼</div>
+                </div>
+                <div class="images">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'><rect width='150' height='150' fill='%232e7d32'/><text x='75' y='80' font-family='Arial' font-size='12' fill='white' text-anchor='middle'>Image 1</text></svg>" alt="Category 1 Image 1">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'><rect width='150' height='150' fill='%232e7d32'/><text x='75' y='80' font-family='Arial' font-size='12' fill='white' text-anchor='middle'>Image 2</text></svg>" alt="Category 1 Image 2">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'><rect width='150' height='150' fill='%232e7d32'/><text x='75' y='80' font-family='Arial' font-size='12' fill='white' text-anchor='middle'>Image 3</text></svg>" alt="Category 1 Image 3">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'><rect width='150' height='150' fill='%232e7d32'/><text x='75' y='80' font-family='Arial' font-size='12' fill='white' text-anchor='middle'>Image 4</text></svg>" alt="Category 1 Image 4">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'><rect width='150' height='150' fill='%232e7d32'/><text x='75' y='80' font-family='Arial' font-size='12' fill='white' text-anchor='middle'>Image 5</text></svg>" alt="Category 1 Image 5">
+                </div>
+            </div>
+
+            <div class="category">
+                <div class="category-header">
+                    <span>Onion demo garden</span>
+                    <div class="arrow">▼</div>
+                </div>
+                <div class="images">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'><rect width='150' height='150' fill='%234caf50'/><text x='75' y='80' font-family='Arial' font-size='12' fill='white' text-anchor='middle'>Image 1</text></svg>" alt="Category 2 Image 1">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'><rect width='150' height='150' fill='%234caf50'/><text x='75' y='80' font-family='Arial' font-size='12' fill='white' text-anchor='middle'>Image 2</text></svg>" alt="Category 2 Image 2">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'><rect width='150' height='150' fill='%234caf50'/><text x='75' y='80' font-family='Arial' font-size='12' fill='white' text-anchor='middle'>Image 3</text></svg>" alt="Category 2 Image 3">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'><rect width='150' height='150' fill='%234caf50'/><text x='75' y='80' font-family='Arial' font-size='12' fill='white' text-anchor='middle'>Image 4</text></svg>" alt="Category 2 Image 4">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'><rect width='150' height='150' fill='%234caf50'/><text x='75' y='80' font-family='Arial' font-size='12' fill='white' text-anchor='middle'>Image 5</text></svg>" alt="Category 2 Image 5">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <h3>Location</h3>
+                            <p>P.O.BOX 468<br>Kinyamaseke 1 Cell, Kinyamaseke North Ward,<br>Kinyamaseke Town Council, Kasese district<br>Uganda</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <h3>Phone Number</h3>
+                            <p>+256 (0)777308364</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">✉️</div>
+                        <div>
+                            <h3>Email</h3>
+                            <p>mughendewomen@gmail.com<br>miria@mughendewomen.org<br>admin@mughendewomen.org</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Enter your message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'><circle cx='250' cy='250' r='200' fill='white'/><text x='250' y='270' font-family='Arial' font-size='100' fill='%232e7d32' text-anchor='middle'>MW</text></svg>" alt="MUWOFA Logo">
+                    </div>
+                    <p>Mughende Women Farmers Association (MUWOFA) empowers women through sustainable agriculture, training, and community development initiatives.</p>
+                </div>
+                <div class="footer-links">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#activities">Activities</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3 class="footer-heading">Contact Info</h3>
+                    <p>P.O.BOX 468, Kinyamaseke Town Council<br>Kasese district, Uganda</p>
+                    <p>+256 (0)777308364</p>
+                    <p>mughendewomen@gmail.com</p>
+                </div>
+                <div class="footer-cta">
+                    <h3 class="footer-heading">Make a Difference</h3>
+                    <p>Support our mission to empower women farmers and transform communities in the Rwenzori region.</p>
+                    <a href="#donate" class="btn">DONATE NOW</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Mughende Women Farmers Association (MUWOFA). All rights reserved.</p>
+                <p>Designed with ❤️ for community empowerment</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
-        // Simple form validation
-        document.getElementById('contact-form').addEventListener('submit', function (event) {
-            event.preventDefault();  // Prevent form submission to handle validation
-
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-
-            if (name === '' || email === '' || message === '') {
-                alert('Please fill in all the fields.');
-            } else {
-                alert('Thank you for your message! We will get back to you soon.');
-                // Here you can add code to send the form data to the server or an email
-                document.getElementById('contact-form').reset();  // Clear the form
+        // Navigation Toggle
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
             }
         });
-    </script>
-
-</body>
-</html>
-
-		
-        <div class="link-pages"></div>
-        <div class="comment-page-wrapper clearfix">
-                    </div>
         
-    </div>
-
-              </div>    
-            </div>      
-
-            <!-- Left sidebar -->
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu after clicking
+                    navMenu.classList.remove('active');
+                }
+            });
+        });
+        
+        // Image Gallery Toggle
+        document.querySelectorAll('.category-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const category = header.parentElement;
+                const images = category.querySelector('.images');
+                const arrow = header.querySelector('.arrow');
+                
+                images.classList.toggle('active');
+                header.classList.toggle('active');
+            });
+        });
+        
+        // Counter Animation
+        function animateCounter(targetId, target, duration) {
+            let start = 0;
+            const step = Math.ceil(target / (duration / 50));
+            const counterElement = document.getElementById(targetId);
             
-            <!-- Right Sidebar -->
+            const interval = setInterval(() => {
+                start += step;
+                if (start >= target) {
+                    clearInterval(interval);
+                    counterElement.innerText = target;
+                } else {
+                    counterElement.innerText = start;
+                }
+            }, 50);
+        }
+        
+        // Year Counter Animation
+        function animateYearCounter(targetId, startYear, endYear, duration) {
+            let currentYear = startYear;
+            const stepTime = Math.floor(duration / (endYear - startYear));
+            const counterElement = document.getElementById(targetId);
             
-        </div> 
-              </div>
-    </div>
-     
-  </div>    
-     
-	</div><!--end page content-->
-	
-</div><!-- End page -->
-
-	<footer id="wp-footer" class="clearfix">
-		
-		
-		<div class="footer-main">		<div data-elementor-type="wp-post" data-elementor-id="161" class="elementor elementor-161">
-									<section class="elementor-section elementor-top-section elementor-element elementor-element-fba3741 elementor-section-boxed elementor-section-height-default elementor-section-height-default row-top" data-id="fba3741" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
-						<div class="elementor-container elementor-column-gap-default">
-					<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-15929a7e column-style-top" data-id="15929a7e" data-element_type="column">
-			<div class="elementor-widget-wrap elementor-element-populated">
-								<div class="elementor-element elementor-element-babd61f elementor-widget elementor-widget-heading" data-id="babd61f" data-element_type="widget" data-widget_type="heading.default">
-				<div class="elementor-widget-container">
-			<h2 class="elementor-heading-title elementor-size-default">About Us</h2>		</div>
-				</div>
-				<div class="elementor-element elementor-element-4c29179c elementor-widget elementor-widget-text-editor" data-id="4c29179c" data-element_type="widget" data-widget_type="text-editor.default">
-				<div class="elementor-widget-container">
-							<p>Mughende Women Farmers Association (MUWOFA) started in the year 1997 by the group of 30 women as founders. The association started with an aim to fight poverty among members and even in entire community of Kinyamaseke and Rwenzori region through savings and credit, tree planting, sustainable agriculture, and domestic violence prevention.</p>						</div>
-				</div>
-					</div>
-		</div>
-				<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-ae10880 column-style-top" data-id="ae10880" data-element_type="column">
-			<div class="elementor-widget-wrap elementor-element-populated">
-								<div class="elementor-element elementor-element-40aca48 elementor-widget elementor-widget-heading" data-id="40aca48" data-element_type="widget" data-widget_type="heading.default">
-				<div class="elementor-widget-container">
-			<h2 class="elementor-heading-title elementor-size-default">Get in touch</h2>		</div>
-				</div>
-				<div class="elementor-element elementor-element-491b51c elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="491b51c" data-element_type="widget" data-widget_type="icon-list.default">
-				<div class="elementor-widget-container">
-					<ul class="elementor-icon-list-items">
-							<li class="elementor-icon-list-item">
-											<a href="mailto:mughendewomen@gmail.com">
-
-												<span class="elementor-icon-list-icon">
-							<i aria-hidden="true" class=" flaticon-email-3"></i>						</span>
-										<span class="elementor-icon-list-text">mughendewomen@gmail.com</span>
-											</a>
-									</li>
-								<li class="elementor-icon-list-item">
-											<a href="mailto:miria@mughende-women.org">
-
-												<span class="elementor-icon-list-icon">
-							<i aria-hidden="true" class=" flaticon-email-3"></i>						</span>
-										<span class="elementor-icon-list-text">miria@mughende-women.org</span>
-											</a>
-									</li>
-								<li class="elementor-icon-list-item">
-											<a href="mailto:admin@mughende-women.org">
-
-												<span class="elementor-icon-list-icon">
-							<i aria-hidden="true" class=" flaticon-email-3"></i>						</span>
-										<span class="elementor-icon-list-text">admin@mughende-women.org</span>
-											</a>
-									</li>
-								<li class="elementor-icon-list-item">
-											<a href="tel:0777308364">
-
-												<span class="elementor-icon-list-icon">
-							<i aria-hidden="true" class="fas fa-phone-alt"></i>						</span>
-										<span class="elementor-icon-list-text">+256 (0)777308364</span>
-											</a>
-									</li>
-								<li class="elementor-icon-list-item">
-											<span class="elementor-icon-list-icon">
-							<i aria-hidden="true" class="fas fa-map-marker-alt"></i>						</span>
-										<span class="elementor-icon-list-text">P.O.BOX 468 Kinyamaseke 1 Cell, Kinyamaseke North Ward, Kinyamaseke Town Council, Kasese district Uganda</span>
-									</li>
-						</ul>
-				</div>
-				</div>
-					</div>
-		</div>
-				<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-543675ee column-style-top" data-id="543675ee" data-element_type="column">
-			<div class="elementor-widget-wrap elementor-element-populated">
-								<div class="elementor-element elementor-element-d821957 elementor-widget elementor-widget-heading" data-id="d821957" data-element_type="widget" data-widget_type="heading.default">
-				<div class="elementor-widget-container">
-			<h2 class="elementor-heading-title elementor-size-default">Make a Difference Today!</h2>		</div>
-				</div>
-				<div class="elementor-element elementor-element-7315795 elementor-widget elementor-widget-gva-call-to-action" data-id="7315795" data-element_type="widget" data-widget_type="gva-call-to-action.default">
-				<div class="elementor-widget-container">
-			<div class="gva-element-gva-call-to-action gva-element">
-   <div class="button-bottom widget gsc-call-to-action">
-      <div class="content-inner clearfix" >
-         <div class="cta-content">
-                                       <h2 class="title">
-                  <span>Donate</span>
-               </h2>
-                                       <div class="desc">Thousands of women's lives are touched by the work we do here at MUWOFA. But we can't do it alone - we rely on the generosity of individuals like you.</div>
-                     </div>
-                     <div class="button-action">
-               		  <a href="https://www.mughende-women.org/donate/" class="btn-cta btn-theme">
-			 <span>DONATE</span>
-		  </a>
-
-		              </div>
-               </div>
-   </div>
-</div>		</div>
-				</div>
-					</div>
-		</div>
-							</div>
-		</section>
-				<section class="elementor-section elementor-top-section elementor-element elementor-element-2383b6f4 elementor-section-boxed elementor-section-height-default elementor-section-height-default row-top" data-id="2383b6f4" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;gradient&quot;}">
-						<div class="elementor-container elementor-column-gap-default">
-					<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-67531a7 column-style-top" data-id="67531a7" data-element_type="column">
-			<div class="elementor-widget-wrap elementor-element-populated">
-								<div class="elementor-element elementor-element-2b2b6538 elementor-widget elementor-widget-text-editor" data-id="2b2b6538" data-element_type="widget" data-widget_type="text-editor.default">
-				<div class="elementor-widget-container">
-							<div>© Copyright 2025. Mughende Women Farmers Association (MUWOFA). <br>Powered by <a href="https://dariusmumbere.github.io/personal"><strong>Developer Mumbere Darius</strong></a></div>						</div>
-				</div>
-					</div>
-		</div>
-				<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-a040d7c column-style-top" data-id="a040d7c" data-element_type="column">
-			<div class="elementor-widget-wrap elementor-element-populated">
-								<div class="elementor-element elementor-element-d0ca6fe elementor-widget elementor-widget-gva-logo" data-id="d0ca6fe" data-element_type="widget" data-widget_type="gva-logo.default">
-				<div class="elementor-widget-container">
-			<div class="gva-element-gva-logo gva-element">      
-  <div class="gsc-logo text-center">
-    
-      <a class="site-branding-logo" href="https://mughende-women.org" title="Home" rel="Home">
-        <img src="https://www.mughende-women.org/wp-content/uploads/2020/12/Mughende-Women-Farmers-Association-MUWOFA.png" alt="Home" />
-      </a>
-      </div>
-</div>		</div>
-				</div>
-					</div>
-		</div>
-				<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-5cc764ba column-style-top" data-id="5cc764ba" data-element_type="column">
-			<div class="elementor-widget-wrap elementor-element-populated">
-								<div class="elementor-element elementor-element-9d423a6 elementor-icon-list--layout-inline elementor-align-left elementor-mobile-align-center elementor-tablet-align-center elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="9d423a6" data-element_type="widget" data-widget_type="icon-list.default">
-				<div>
-					<h2>"A Poverty free Society"</h2>
-							
-				</div>
-				</div>
-					</div>
-		</div>
-							</div>
-		</section>
-							</div>
-		</div>			
-
-					<div class="return-top default"><i class="fas fa-arrow-up"></i></div>
-		
-	</footer>
-	
-	<div id="gva-overlay"></div>
-	<div id="gva-quickview" class="clearfix"></div>
-	<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="blur-svg">
-	   <defs>
-	      <filter id="blur-filter">
-	         <feGaussianBlur stdDeviation="3"></feGaussianBlur>
-	      </filter>
-	    </defs>
-	</svg>
-
-		<script>
-			window.RS_MODULES = window.RS_MODULES || {};
-			window.RS_MODULES.modules = window.RS_MODULES.modules || {};
-			window.RS_MODULES.waiting = window.RS_MODULES.waiting || [];
-			window.RS_MODULES.defered = true;
-			window.RS_MODULES.moduleWaiting = window.RS_MODULES.moduleWaiting || {};
-			window.RS_MODULES.type = 'compiled';
-		</script>
-		<link href="https://fonts.googleapis.com/css?family=Poppins:600%7CRoboto:400&display=swap" rel="stylesheet" property="stylesheet" media="all" type="text/css" >
-
-<script>
-		if(typeof revslider_showDoubleJqueryError === "undefined") {function revslider_showDoubleJqueryError(sliderID) {console.log("You have some jquery.js library include that comes after the Slider Revolution files js inclusion.");console.log("To fix this, you can:");console.log("1. Set 'Module General Options' -> 'Advanced' -> 'jQuery & OutPut Filters' -> 'Put JS to Body' to on");console.log("2. Find the double jQuery.js inclusion and remove it");return "Double Included jQuery Library";}}
-</script>
-<link rel='stylesheet' id='elementor-post-161-css' href='https://mughende-women.org/wp-content/uploads/elementor/css/post-161.css?ver=1716793209' type='text/css' media='all' />
-<link rel='stylesheet' id='e-animations-css' href='https://mughende-women.org/wp-content/plugins/elementor/assets/lib/animations/animations.min.css?ver=3.6.4' type='text/css' media='all' />
-<link rel='stylesheet' id='rs-plugin-settings-css' href='https://mughende-women.org/wp-content/plugins/revslider/public/assets/css/rs6.css?ver=6.5.20' type='text/css' media='all' />
-<style id='rs-plugin-settings-inline-css' type='text/css'>
-#rs-demo-id {}
-</style>
-<script type="text/javascript" src="https://mughende-women.org/wp-content/plugins/qempo-themer/assets/js/main.js" id="gavias-themer-js"></script>
-<script type="text/javascript" src="https://mughende-women.org/wp-content/plugins/revslider/public/assets/js/rbtools.min.js?ver=6.5.18" defer async id="tp-tools-js"></script>
-<script type="text/javascript" src="https://mughende-women.org/wp-content/plugins/revslider/public/assets/js/rs6.min.js?ver=6.5.20" defer async id="revmin-js"></script>
-<script type="text/javascript" id="rocket-browser-checker-js-after">
-/* <![CDATA[ */
-"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
-/* ]]> */
-</script>
-<script type="text/javascript" id="rocket-preload-links-js-extra">
-/* <![CDATA[ */
-var RocketPreloadLinksConfig = {"excludeUris":"\/(?:.+\/)?feed(?:\/(?:.+\/?)?)?$|\/(?:.+\/)?embed\/|\/(index.php\/)?(.*)wp-json(\/.*|$)|\/refer\/|\/go\/|\/recommend\/|\/recommends\/","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php|html|htm","siteUrl":"https:\/\/mughende-women.org","onHoverDelay":"100","rateThrottle":"3"};
-/* ]]> */
-</script>
-<script type="text/javascript" id="rocket-preload-links-js-after">
-/* <![CDATA[ */
-(function() {
-"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
-}());
-/* ]]> */
-</script>
-<script type="text/javascript" src="https://mughende-women.org/wp-content/plugins/qempo-themer/elementor/assets/libs/typed.min.js?ver=1.0.0" id="typed-js"></script>
-<script type="text/javascript" src="https://mughende-women.org/wp-content/plugins/qempo-themer/elementor/assets/main.js?ver=1.0.0" id="gavias.elements-js"></script>
-<script type="text/javascript" src="https://mughende-women.org/wp-content/plugins/elementor-pro/assets/js/webpack-pro.runtime.min.js?ver=3.6.5" id="elementor-pro-webpack-runtime-js"></script>
-<script type="text/javascript" src="https://mughende-women.org/wp-content/plugins/elementor/assets/js/webpack.runtime.min.js?ver=3.6.4" id="elementor-webpack-runtime-js"></script>
-<script type="text/javascript" src="https://mughende-women.org/wp-content/plugins/elementor/assets/js/frontend-modules.min.js?ver=3.6.4" id="elementor-frontend-modules-js"></script>
-<script type="text/javascript" src="https://mughende-women.org/wp-includes/js/dist/hooks.min.js?ver=4d63a3d491d11ffd8ac6" id="wp-hooks-js"></script>
-<script type="text/javascript" src="https://mughende-women.org/wp-includes/js/dist/i18n.min.js?ver=5e580eb46a90c2b997e6" id="wp-i18n-js"></script>
-<script type="text/javascript" id="wp-i18n-js-after">
-/* <![CDATA[ */
-wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
-/* ]]> */
-</script>
-<script type="text/javascript" id="elementor-pro-frontend-js-before">
-/* <![CDATA[ */
-var ElementorProFrontendConfig = {"ajaxurl":"https:\/\/mughende-women.org\/wp-admin\/admin-ajax.php","nonce":"b6560a8829","urls":{"assets":"https:\/\/mughende-women.org\/wp-content\/plugins\/elementor-pro\/assets\/","rest":"https:\/\/mughende-women.org\/wp-json\/"},"shareButtonsNetworks":{"facebook":{"title":"Facebook","has_counter":true},"twitter":{"title":"Twitter"},"linkedin":{"title":"LinkedIn","has_counter":true},"pinterest":{"title":"Pinterest","has_counter":true},"reddit":{"title":"Reddit","has_counter":true},"vk":{"title":"VK","has_counter":true},"odnoklassniki":{"title":"OK","has_counter":true},"tumblr":{"title":"Tumblr"},"digg":{"title":"Digg"},"skype":{"title":"Skype"},"stumbleupon":{"title":"StumbleUpon","has_counter":true},"mix":{"title":"Mix"},"telegram":{"title":"Telegram"},"pocket":{"title":"Pocket","has_counter":true},"xing":{"title":"XING","has_counter":true},"whatsapp":{"title":"WhatsApp"},"email":{"title":"Email"},"print":{"title":"Print"}},"facebook_sdk":{"lang":"en_US","app_id":""},"lottie":{"defaultAnimationUrl":"https:\/\/mughende-women.org\/wp-content\/plugins\/elementor-pro\/modules\/lottie\/assets\/animations\/default.json"}};
-/* ]]> */
-</script>
-<script type="text/javascript" src="https://mughende-women.org/wp-content/plugins/elementor-pro/assets/js/frontend.min.js?ver=3.6.5" id="elementor-pro-frontend-js"></script>
-<script type="text/javascript" src="https://mughende-women.org/wp-content/plugins/elementor/assets/lib/waypoints/waypoints.min.js?ver=4.0.2" id="elementor-waypoints-js"></script>
-<script type="text/javascript" src="https://mughende-women.org/wp-includes/js/jquery/ui/core.min.js?ver=1.13.3" id="jquery-ui-core-js"></script>
-<script type="text/javascript" id="elementor-frontend-js-before">
-/* <![CDATA[ */
-var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false,"isScriptDebug":false},"i18n":{"shareOnFacebook":"Share on Facebook","shareOnTwitter":"Share on Twitter","pinIt":"Pin it","download":"Download","downloadImage":"Download image","fullscreen":"Fullscreen","zoom":"Zoom","share":"Share","playVideo":"Play Video","previous":"Previous","next":"Next","close":"Close"},"is_rtl":false,"breakpoints":{"xs":0,"sm":480,"md":768,"lg":1025,"xl":1440,"xxl":1600},"responsive":{"breakpoints":{"mobile":{"label":"Mobile","value":767,"default_value":767,"direction":"max","is_enabled":true},"mobile_extra":{"label":"Mobile Extra","value":880,"default_value":880,"direction":"max","is_enabled":false},"tablet":{"label":"Tablet","value":1024,"default_value":1024,"direction":"max","is_enabled":true},"tablet_extra":{"label":"Tablet Extra","value":1200,"default_value":1200,"direction":"max","is_enabled":false},"laptop":{"label":"Laptop","value":1366,"default_value":1366,"direction":"max","is_enabled":false},"widescreen":{"label":"Widescreen","value":2400,"default_value":2400,"direction":"min","is_enabled":false}}},"version":"3.6.4","is_static":false,"experimentalFeatures":{"e_dom_optimization":true,"e_optimized_assets_loading":true,"e_optimized_css_loading":true,"a11y_improvements":true,"e_import_export":true,"additional_custom_breakpoints":true,"e_hidden_wordpress_widgets":true,"theme_builder_v2":true,"landing-pages":true,"elements-color-picker":true,"favorite-widgets":true,"admin-top-bar":true,"page-transitions":true,"form-submissions":true,"e_scroll_snap":true},"urls":{"assets":"https:\/\/mughende-women.org\/wp-content\/plugins\/elementor\/assets\/"},"settings":{"page":[],"editorPreferences":[]},"kit":{"active_breakpoints":["viewport_mobile","viewport_tablet"],"global_image_lightbox":"yes","lightbox_enable_counter":"yes","lightbox_enable_fullscreen":"yes","lightbox_enable_zoom":"yes","lightbox_enable_share":"yes","lightbox_title_src":"title","lightbox_description_src":"description"},"post":{"id":18,"title":"Home%20%7C%20Mughende%20Women%20Farmers%20Association%20%28MUWOFA%29","excerpt":"","featuredImage":false}};
-/* ]]> */
-</script>
-<script type="text/javascript" src="https://mughende-women.org/wp-content/plugins/elementor/assets/js/frontend.min.js?ver=3.6.4" id="elementor-frontend-js"></script>
-<script type="text/javascript" src="https://mughende-women.org/wp-content/plugins/elementor-pro/assets/js/elements-handlers.min.js?ver=3.6.5" id="pro-elements-handlers-js"></script>
-<link rel="stylesheet" type="text/css" href="https://mughende-women.org/wp-content/plugins/qempo-themer/assets/icons/flaticon.css"><script id="rs-initialisation-scripts">
-		var	tpj = jQuery;
-
-		var	revapi1;
-
-		if(window.RS_MODULES === undefined) window.RS_MODULES = {};
-		if(RS_MODULES.modules === undefined) RS_MODULES.modules = {};
-		RS_MODULES.modules["revslider11"] = {once: RS_MODULES.modules["revslider11"]!==undefined ? RS_MODULES.modules["revslider11"].once : undefined, init:function() {
-			window.revapi1 = window.revapi1===undefined || window.revapi1===null || window.revapi1.length===0  ? document.getElementById("rev_slider_1_1") : window.revapi1;
-			if(window.revapi1 === null || window.revapi1 === undefined || window.revapi1.length==0) { window.revapi1initTry = window.revapi1initTry ===undefined ? 0 : window.revapi1initTry+1; if (window.revapi1initTry<20) requestAnimationFrame(function() {RS_MODULES.modules["revslider11"].init()}); return;}
-			window.revapi1 = jQuery(window.revapi1);
-			if(window.revapi1.revolution==undefined){ revslider_showDoubleJqueryError("rev_slider_1_1"); return;}
-			revapi1.revolutionInit({
-					revapi:"revapi1",
-					DPR:"dpr",
-					visibilityLevels:"1240,1024,778,480",
-					gridwidth:"1320,1024,778,480",
-					gridheight:"900,650,480,350",
-					lazyType:"smart",
-					spinner:"spinner0",
-					perspective:600,
-					perspectiveType:"local",
-					editorheight:"900,650,480,350",
-					responsiveLevels:"1240,1024,778,480",
-					ajaxUrl:"https://mughende-women.org/wp-admin/admin-ajax.php",
-					progressBar: {
-						color:"rgba(0,0,0,0.15)",
-						vertical:"top",
-						size:5,
-						x:0,
-						y:0
-						},
-					parallax: {
-						levels:[5,10,15,20,25,30,35,40,45,46,47,48,49,50,51,55],
-						type:"mouse"
-					},
-					viewPort: {
-						global:true,
-						globalDist:"-200px",
-						enable:false,
-						visible_area:"20%"
-					},
-					fallbacks: {
-						allowHTML5AutoPlayOnAndroid:true
-					},
-			});
-			
-		}} // End of RevInitScript
-
-		if (window.RS_MODULES.checkMinimal!==undefined) { window.RS_MODULES.checkMinimal();};
-	</script>
-	<script>
-    // ScrollReveal Animations
-    ScrollReveal().reveal('.intro h2', {
-      duration: 1000,
-      origin: 'top',
-      distance: '50px',
-      reset: true,
-    });
-
-    ScrollReveal().reveal('.intro p, .intro ul', {
-      duration: 1200,
-      origin: 'right',
-      distance: '100px',
-      interval: 200,
-      reset: true,	    
-    });
-
-    ScrollReveal().reveal('.project-card', {
-      duration: 2000,
-      origin: 'left',
-      distance: '150px',
-      interval: 200, // Stagger animation for project cards
-      reset: true,	    
-    });
-  </script>
-<script>
-  document.querySelectorAll('.category-header').forEach(header => {
-    header.addEventListener('click', () => {
-      const category = header.parentElement;
-      const images = category.querySelector('.images');
-      const arrow = header.querySelector('.arrow');
-
-      images.style.display = images.style.display === 'block' ? 'none' : 'block';
-      header.classList.toggle('active');
-    });
-  });
-</script>
-<script>window.lazyLoadOptions=[{elements_selector:"img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}},{elements_selector:".rocket-lazyload",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,}];window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(var i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
-if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
-images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
-if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async src="https://mughende-women.org/wp-content/plugins/wp-rocket/assets/js/lazyload/17.8.3/lazyload.min.js"></script><script>function lazyLoadThumb(e,alt){var t='<img data-lazy-src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" width="480" height="360"><noscript><img src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" width="480" height="360"></noscript>',a='<button class="play" aria-label="play Youtube video"></button>';t=t.replace('alt=""','alt="'+alt+'"');return t.replace("ID",e)+a}function lazyLoadYoutubeIframe(){var e=document.createElement("iframe"),t="ID?autoplay=1";t+=0===this.parentNode.dataset.query.length?'':'&'+this.parentNode.dataset.query;e.setAttribute("src",t.replace("ID",this.parentNode.dataset.src)),e.setAttribute("frameborder","0"),e.setAttribute("allowfullscreen","1"),e.setAttribute("allow", "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"),this.parentNode.parentNode.replaceChild(e,this.parentNode)}document.addEventListener("DOMContentLoaded",function(){var e,t,p,a=document.getElementsByClassName("rll-youtube-player");for(t=0;t<a.length;t++)e=document.createElement("div"),e.setAttribute("data-id",a[t].dataset.id),e.setAttribute("data-query", a[t].dataset.query),e.setAttribute("data-src", a[t].dataset.src),e.innerHTML=lazyLoadThumb(a[t].dataset.id,a[t].dataset.alt),a[t].appendChild(e),p=e.querySelector('.play'),p.onclick=lazyLoadYoutubeIframe});</script>
+            const interval = setInterval(() => {
+                if (currentYear >= endYear) {
+                    clearInterval(interval);
+                    counterElement.innerText = endYear;
+                } else {
+                    currentYear++;
+                    counterElement.innerText = currentYear;
+                }
+            }, stepTime);
+        }
+        
+        // Start counters when in viewport
+        function isInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+        
+        let countersAnimated = false;
+        
+        function checkCounters() {
+            const counterSection = document.querySelector('.counter-section');
+            if (isInViewport(counterSection) && !countersAnimated) {
+                animateCounter('total-users', 200, 2000);
+                animateCounter('products-sold', 8, 2000);
+                animateYearCounter('website-visitors', 1997, 2025, 5000);
+                countersAnimated = true;
+            }
+        }
+        
+        window.addEventListener('scroll', checkCounters);
+        window.addEventListener('load', checkCounters);
+        
+        // Form Validation
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+                
+                if (name === '' || email === '' || message === '') {
+                    alert('Please fill in all fields.');
+                    return;
+                }
+                
+                // Simple email validation
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(email)) {
+                    alert('Please enter a valid email address.');
+                    return;
+                }
+                
+                // Here you would typically send the form data to a server
+                alert('Thank you for your message! We will get back to you soon.');
+                contactForm.reset();
+            });
+        }
+        
+        // Pause scroller on hover
+        const imageTrack = document.querySelector('.image-track');
+        if (imageTrack) {
+            imageTrack.addEventListener('mouseover', () => {
+                imageTrack.style.animationPlayState = 'paused';
+            });
+            
+            imageTrack.addEventListener('mouseout', () => {
+                imageTrack.style.animationPlayState = 'running';
+            });
+        }
+    </script>
 </body>
 </html>
